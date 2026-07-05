@@ -1,0 +1,109 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Whop
+providerId: whop
+created: '2026-07-05'
+modified: '2026-07-05'
+reconciled: true
+tags:
+- Memberships
+- Payments
+- Creator Economy
+- Marketplace
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of building on Whop. Unlike a metered API vendor, Whop's cost is
+  driven by transaction economics: payment processing fees on each sale
+  (2.7% + $0.30 domestic, with international / conversion / ACH variants),
+  payout fees per withdrawal, dispute and fraud fees, and optional
+  revenue-optimization fees (tax, affiliate). The API itself carries no
+  metered per-call charge; cost management here means minimizing effective
+  take-rate across the money movement the API orchestrates.
+notes: >-
+  Fees grounded against https://docs.whop.com/fees as of 2026-07-05. Reported
+  effective take-rate for creators gating communities (Discord/Telegram) is
+  commonly cited near 6-7% all-in; treat as directional and verify.
+sources:
+- https://docs.whop.com/fees
+- https://whop.com/network/pricing/
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Whop
+serviceCategory: Commerce and Payments
+billingModel:
+  pricingCategory: Transaction-Based
+  billingFrequency: Per Transaction
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+  - Adjustment
+focusColumns:
+  ServiceName: Whop
+  ServiceCategory: Commerce and Payments
+  ProviderName: Whop
+  PublisherName: Whop
+  InvoiceIssuerName: Whop
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Transaction-Based
+meters:
+- name: processing_fee
+  description: Payment processing fee per successful sale (2.7% + $0.30 domestic; +1.5% intl; +1% conversion).
+  unit: transactions
+  aggregation: sum
+  dimensions:
+  - company
+  - currency
+  - card_type
+- name: payout_fee
+  description: Fee per payout / withdrawal, varying by method (ACH, RTP, crypto, wire).
+  unit: payouts
+  aggregation: sum
+  dimensions:
+  - company
+  - method
+- name: dispute_fee
+  description: Fee per dispute ($15) and per early dispute alert ($29).
+  unit: disputes
+  aggregation: sum
+  dimensions:
+  - company
+- name: fraud_fee
+  description: Optional fraud tooling fees (3DS $0.03, Radar $0.07 per transaction).
+  unit: transactions
+  aggregation: sum
+  dimensions:
+  - company
+- name: tax_fee
+  description: Tax and remittance fee (2% per transaction when tax is collected).
+  unit: transactions
+  aggregation: sum
+  dimensions:
+  - company
+- name: affiliate_fee
+  description: Affiliate processing fee (1.25% per transaction) when affiliate payouts apply.
+  unit: transactions
+  aggregation: sum
+  dimensions:
+  - company
+principles:
+- name: Visibility
+  description: Pull payments, fees, refunds, and payout records via the API to see true effective take-rate per product and plan.
+- name: Allocation
+  description: Tag payments by product / plan / company and map fees to the sale that generated them for per-offer margin.
+- name: Optimization
+  description: Prefer cheaper payout methods (ACH over instant/crypto/wire), reduce disputes to avoid $15/$29 fees, and weigh tax/affiliate features against their per-transaction cost.
+- name: Accountability
+  description: Assign an owner per company / storefront; review effective fee percentage monthly against a target take-rate.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

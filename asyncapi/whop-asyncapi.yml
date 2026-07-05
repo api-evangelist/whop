@@ -1,0 +1,189 @@
+asyncapi: '2.6.0'
+id: 'urn:com:whop:realtime:websocket'
+info:
+  title: Whop Realtime WebSocket
+  version: '1.0.0'
+  description: |
+    AsyncAPI 2.6 description of Whop's **realtime WebSocket** surface, used by
+    Whop apps for bidirectional realtime messaging (custom app messages plus
+    chat / feed updates) between connected clients and Whop's servers.
+
+    Scope / grounding notes:
+
+    - Whop documents a WebSocket feature for apps at
+      docs.whop.com/apps/features/websocket-guide. It is a **real, documented,
+      bidirectional** transport, which is why it is modeled here as AsyncAPI.
+    - The connection is **established and authenticated through Whop's SDK**,
+      not by hand-connecting to a published raw `wss://` URL. In React the
+      `WhopWebsocketProvider` from `@whop/react` opens the connection; other
+      runtimes use `connectToWebsocket` from `@whop/api`. Whop does **not**
+      publish a standalone raw `wss://` endpoint string for arbitrary clients,
+      so the `servers.whopRealtime.url` below is a **modeled placeholder**
+      (`realtime.whop.com`) that documents where the SDK connects, not a
+      verbatim documented URL. Verify on reconciliation.
+    - Clients send messages with `useBroadcastWebsocketMessage` (React) and
+      receive them with `useOnWebsocketMessage`; a trusted server can broadcast
+      with `whopApi.websockets.sendMessage`. Messages carry a `target`
+      (for example `everyone`, an experience, or a custom channel).
+    - Connection lifecycle is observable via `connect`, `disconnect`, and
+      `connectionStatus` events on the websocket instance.
+
+    This document models the message shapes and channels at a transport level;
+    exact payload schemas are modeled from the documented SDK surface and
+    should be verified against the live guide.
+  contact:
+    name: API Evangelist
+    email: kin@apievangelist.com
+    url: https://apievangelist.com
+  license:
+    name: API documentation - Whop Terms of Service
+    url: https://whop.com/terms-of-service/
+  x-transport-notes:
+    transport: WebSocket
+    protocol: wss
+    direction: bidirectional
+    connection: Established via @whop/react WhopWebsocketProvider or @whop/api connectToWebsocket. No raw wss:// URL is published; SDK manages the handshake and auth.
+    serverBroadcast: whopApi.websockets.sendMessage (trusted, server-to-clients)
+    clientSend: useBroadcastWebsocketMessage (React) with a target field
+    clientReceive: useOnWebsocketMessage (React)
+    lifecycleEvents: [connect, disconnect, connectionStatus]
+    urlIsModeled: true
+    source: https://docs.whop.com/apps/features/websocket-guide
+defaultContentType: application/json
+servers:
+  whopRealtime:
+    url: realtime.whop.com
+    protocol: wss
+    description: |
+      Whop realtime WebSocket server. The host shown here is a MODELED
+      placeholder - Whop's docs establish the connection through the SDK
+      (@whop/react / @whop/api) rather than publishing a raw wss:// URL.
+      Authentication is handled by the SDK using the app/user context.
+    security:
+      - sdkManaged: []
+channels:
+  app/messages:
+    description: |
+      Custom application messages broadcast between clients. Clients publish
+      with `useBroadcastWebsocketMessage` (setting a `target`) and subscribe
+      with `useOnWebsocketMessage`. A trusted server broadcasts the same
+      message shape with `whopApi.websockets.sendMessage`.
+    publish:
+      operationId: sendAppMessage
+      summary: Send a custom app message to a target.
+      message:
+        $ref: '#/components/messages/AppMessage'
+    subscribe:
+      operationId: receiveAppMessage
+      summary: Receive custom app messages for subscribed targets.
+      message:
+        $ref: '#/components/messages/AppMessage'
+  chat/feed:
+    description: |
+      Realtime chat / feed messages delivered to connected clients (for example
+      new chat messages in an experience the client is subscribed to). Modeled
+      from the documented realtime feed behavior.
+    subscribe:
+      operationId: receiveFeedMessage
+      summary: Receive realtime chat / feed updates.
+      message:
+        $ref: '#/components/messages/FeedMessage'
+  connection/status:
+    description: |
+      Connection lifecycle updates surfaced by the SDK via the `connect`,
+      `disconnect`, and `connectionStatus` events on the websocket instance.
+    subscribe:
+      operationId: receiveConnectionStatus
+      summary: Observe websocket connection status changes.
+      message:
+        $ref: '#/components/messages/ConnectionStatus'
+components:
+  securitySchemes:
+    sdkManaged:
+      type: userPassword
+      description: |
+        Connection auth is handled by the Whop SDK using the app API key
+        (server) or the signed-in user context (client). No bearer token is
+        placed on a raw WebSocket URL by application code.
+  messages:
+    AppMessage:
+      name: AppMessage
+      title: Custom app websocket message
+      summary: A custom message broadcast between app clients with a target.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/AppMessage'
+      examples:
+        - name: broadcastEveryone
+          summary: Broadcast to everyone in the app
+          payload:
+            target: everyone
+            channel: null
+            json: '{"type":"cursor","x":120,"y":40}'
+    FeedMessage:
+      name: FeedMessage
+      title: Realtime chat / feed message
+      summary: A realtime chat or feed update delivered to subscribed clients.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/FeedMessage'
+    ConnectionStatus:
+      name: ConnectionStatus
+      title: Connection status update
+      summary: A websocket connection lifecycle event.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ConnectionStatus'
+      examples:
+        - name: connected
+          summary: Connected
+          payload:
+            status: connected
+  schemas:
+    AppMessage:
+      type: object
+      description: Custom app message envelope broadcast over the websocket.
+      required:
+        - target
+      properties:
+        target:
+          type: string
+          description: 'Delivery target, for example "everyone", an experience ID, or a custom channel name.'
+        channel:
+          type: string
+          nullable: true
+          description: Optional custom channel name when not broadcasting to everyone.
+        json:
+          type: string
+          description: Application-defined JSON-encoded string payload.
+        isTrusted:
+          type: boolean
+          description: True when the message originated from a trusted server broadcast (whopApi.websockets.sendMessage).
+    FeedMessage:
+      type: object
+      description: Realtime chat / feed message.
+      properties:
+        feedType:
+          type: string
+          description: 'The feed type, for example chat or dms.'
+        feedId:
+          type: string
+        entityType:
+          type: string
+        entity:
+          type: object
+          additionalProperties: true
+          description: The message/entity payload (for example a chat message).
+    ConnectionStatus:
+      type: object
+      description: Websocket connection lifecycle status.
+      required:
+        - status
+      properties:
+        status:
+          type: string
+          enum:
+            - connecting
+            - connected
+            - disconnected
+          description: Current connection status emitted via connect / disconnect / connectionStatus events.

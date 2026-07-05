@@ -1,0 +1,180 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Whop REST API (v1)",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{apiKey}}"
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Memberships", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List memberships", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.whop.com/api/v1/memberships" },
+          "docs": "Returns a cursor-paginated list of memberships. company_id is required for API keys."
+        },
+        {
+          "info": { "name": "Retrieve a membership", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.whop.com/api/v1/memberships/:id",
+            "params": [ { "name": "id", "value": "", "type": "path", "description": "The membership ID." } ]
+          },
+          "docs": "Retrieves a single membership by ID."
+        },
+        {
+          "info": { "name": "Cancel a membership", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.whop.com/api/v1/memberships/:id/cancel",
+            "params": [ { "name": "id", "value": "", "type": "path" } ]
+          },
+          "docs": "Cancels a membership. Action path modeled from the documented cancel operation."
+        },
+        {
+          "info": { "name": "Add free days to a membership", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.whop.com/api/v1/memberships/:id/add_free_days",
+            "params": [ { "name": "id", "value": "", "type": "path" } ],
+            "body": { "type": "json", "data": "{\"days\":7}" }
+          },
+          "docs": "Extends the renewal period by a number of free days."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Products", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List products", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.whop.com/api/v1/products" },
+          "docs": "Lists products (access passes) for a company."
+        },
+        {
+          "info": { "name": "Create a product", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.whop.com/api/v1/products", "body": { "type": "json", "data": "{\"title\":\"\"}" } },
+          "docs": "Creates a new product."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Plans", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List plans", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.whop.com/api/v1/plans" },
+          "docs": "Lists pricing plans."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Payments", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List payments", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.whop.com/api/v1/payments" },
+          "docs": "Returns a cursor-paginated list of payments."
+        },
+        {
+          "info": { "name": "Create a payment", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.whop.com/api/v1/payments", "body": { "type": "json", "data": "{}" } },
+          "docs": "Charges a saved payment method off-session."
+        },
+        {
+          "info": { "name": "Refund a payment", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.whop.com/api/v1/payments/:id/refund",
+            "params": [ { "name": "id", "value": "", "type": "path" } ]
+          },
+          "docs": "Refunds a payment."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Users", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Retrieve a user", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.whop.com/api/v1/users/:id",
+            "params": [ { "name": "id", "value": "", "type": "path" } ]
+          },
+          "docs": "Retrieves a user by ID."
+        },
+        {
+          "info": { "name": "Check user access", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.whop.com/api/v1/users/:id/check_access",
+            "params": [ { "name": "id", "value": "", "type": "path" } ]
+          },
+          "docs": "Checks whether a user has access to an access pass / experience."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Companies", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List companies", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.whop.com/api/v1/companies" },
+          "docs": "Lists companies."
+        },
+        {
+          "info": { "name": "Create a company", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.whop.com/api/v1/companies", "body": { "type": "json", "data": "{\"title\":\"\"}" } },
+          "docs": "Onboards a sub-merchant company."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Checkout Configurations", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Create a checkout configuration", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.whop.com/api/v1/checkout_configurations", "body": { "type": "json", "data": "{}" } },
+          "docs": "Creates a reusable checkout / payment flow configuration."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Transfers", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Create a transfer", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.whop.com/api/v1/transfers", "body": { "type": "json", "data": "{}" } },
+          "docs": "Programmatically pays out a user or ledger account."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Webhooks", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Create a webhook", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.whop.com/api/v1/webhooks", "body": { "type": "json", "data": "{\"url\":\"\",\"events\":[]}" } },
+          "docs": "Registers a webhook endpoint for platform events."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Promo Codes", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List promo codes", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.whop.com/api/v1/promo_codes" },
+          "docs": "Lists promo codes."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+# Whop GraphQL - CONCEPTUAL / MODELED schema sketch.
+# This is NOT Whop's authoritative generated schema. It is a minimal SDL sketch
+# of core Whop types for discovery/indexing. Introspect the live endpoint at
+# https://api.whop.com/public-graphql for the real schema.
+
+type Query {
+  "Search discoverable access passes / products."
+  discoverySearch(query: String!, first: Int): [AccessPass!]!
+  "Fetch a company by ID."
+  company(id: ID!): Company
+  "Fetch an access pass (product) by ID."
+  accessPass(id: ID!): AccessPass
+  "Fetch a plan by ID."
+  plan(id: ID!): Plan
+  "Fetch a public user profile."
+  publicUser(id: ID!): User
+  "Check whether a user has access to an experience or access pass."
+  hasAccess(userId: ID!, accessPassId: ID, experienceId: ID): AccessCheck!
+}
+
+type Mutation {
+  "Create or update a checkout configuration."
+  createCheckoutConfiguration(input: CheckoutConfigurationInput!): CheckoutConfiguration!
+  "Send a direct message."
+  sendDirectMessage(input: SendDirectMessageInput!): Message!
+}
+
+type Company {
+  id: ID!
+  title: String!
+  route: String
+  imageUrl: String
+  accessPasses: [AccessPass!]!
+}
+
+"An access pass is the product a company sells."
+type AccessPass {
+  id: ID!
+  title: String!
+  headline: String
+  route: String
+  logo: String
+  visibility: String
+  memberCount: Int
+  plans: [Plan!]!
+  company: Company!
+}
+
+type Plan {
+  id: ID!
+  planType: String
+  baseCurrency: String
+  initialPrice: Float
+  renewalPrice: Float
+  billingPeriod: Int
+  trialPeriodDays: Int
+  accessPass: AccessPass!
+}
+
+type Membership {
+  id: ID!
+  status: String!
+  createdAt: String!
+  renewalPeriodEnd: String
+  user: User!
+  accessPass: AccessPass!
+  plan: Plan
+}
+
+type User {
+  id: ID!
+  username: String
+  name: String
+  profilePicUrl: String
+}
+
+type Payment {
+  id: ID!
+  status: String!
+  total: Float!
+  currency: String!
+  createdAt: String!
+  user: User
+}
+
+type AccessCheck {
+  hasAccess: Boolean!
+  accessLevel: String
+}
+
+type CheckoutConfiguration {
+  id: ID!
+  planId: ID
+  redirectUrl: String
+}
+
+type Message {
+  id: ID!
+  content: String
+  createdAt: String!
+}
+
+input CheckoutConfigurationInput {
+  planId: ID!
+  redirectUrl: String
+}
+
+input SendDirectMessageInput {
+  toUserId: ID!
+  content: String!
+}

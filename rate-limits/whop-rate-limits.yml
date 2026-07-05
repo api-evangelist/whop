@@ -1,0 +1,59 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Whop
+providerId: whop
+created: '2026-07-05'
+modified: '2026-07-05'
+reconciled: false
+tags:
+- Rate Limiting
+- Quotas
+- Throttling
+- Memberships
+- Payments
+description: >-
+  Whop enforces per-window request rate limits that differ by API generation.
+  The GraphQL API additionally enforces query complexity and depth caps.
+  Values below are grounded against Whop's developer documentation; the
+  current REST v1 API's exact published limit is not itemized in the sources
+  gathered and is left as "see provider documentation" pending reconciliation.
+notes: >-
+  Rate limits per generation summarized from Whop developer documentation
+  (GraphQL 10 req / 10s, V5 REST 20 req / 10s, V2 REST 100 req / 10s). GraphQL
+  also caps max complexity at 1000 and max depth at 10. Verify the current
+  REST v1 (api.whop.com/api/v1) limit on reconciliation.
+sources:
+- https://docs.whop.com/developer/api/getting-started
+- https://docs.whop.com/fees
+responseCodes:
+  throttled: 429
+limits:
+- name: GraphQL API
+  scope: account
+  metric: requests
+  limit: 10 per 10 seconds
+  notes: Max query complexity 1000, max depth 10. Endpoint https://api.whop.com/public-graphql.
+- name: REST v1 API
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: Current primary REST surface at https://api.whop.com/api/v1; specific published limit not reconciled in this artifact.
+- name: V5 REST API (legacy)
+  scope: account
+  metric: requests
+  limit: 20 per 10 seconds
+  notes: Deprecated legacy generation.
+- name: V2 REST API (legacy)
+  scope: account
+  metric: requests
+  limit: 100 per 10 seconds
+  notes: Legacy generation.
+policies:
+- name: Per-Generation Limits
+  description: Limits and complexity caps vary by API generation (GraphQL vs V5 vs V2 REST).
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor 429 responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

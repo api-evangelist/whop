@@ -1,0 +1,119 @@
+aid: whop
+name: Whop
+review:
+  question: Does Whop expose a documented public WebSocket API?
+  answer: true
+  date: '2026-07-05'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: true
+  asyncapiScopeNote: |
+    Whop documents a bidirectional realtime WebSocket for apps at
+    docs.whop.com/apps/features/websocket-guide. It is a genuine documented
+    WebSocket transport, so an AsyncAPI 2.6 document was authored at
+    asyncapi/whop-asyncapi.yml. Important nuance: the connection is established
+    and authenticated through Whop's SDK (WhopWebsocketProvider from
+    @whop/react, or connectToWebsocket from @whop/api), NOT by connecting to a
+    published raw wss:// endpoint URL. Whop does not publish a standalone
+    wss:// URL string for arbitrary clients, so the server URL modeled in the
+    AsyncAPI document (realtime.whop.com) is an explicit MODELED placeholder,
+    documented as such throughout the spec.
+findings:
+  summary: |
+    Whop DOES expose a documented public WebSocket API - a bidirectional
+    realtime messaging surface for Whop apps. Clients broadcast custom messages
+    with useBroadcastWebsocketMessage (React) and receive them with
+    useOnWebsocketMessage; a trusted server broadcasts with
+    whopApi.websockets.sendMessage. Messages carry a target (for example
+    "everyone", an experience, or a custom channel), and the SDK surfaces
+    connect / disconnect / connectionStatus lifecycle events. The WebSocket is
+    accessed exclusively through the @whop/react and @whop/api SDKs, which
+    manage the handshake and authentication - Whop's docs do not publish a raw
+    wss:// connection URL. Alongside this, Whop's primary programmable surfaces
+    are the REST v1 API (https://api.whop.com/api/v1, Bearer auth) and the
+    GraphQL API (https://api.whop.com/public-graphql), both request/response
+    over HTTPS.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.whop.com/api/v1
+      documented: true
+      note: Current primary REST API. Sandbox at https://sandbox-api.whop.com/api/v1. Bearer auth (Company/Account or App API key; OAuth on behalf of a user).
+    - protocol: GraphQL
+      scheme: https
+      baseURL: https://api.whop.com/public-graphql
+      documented: true
+      note: POST query/variables. Headers Authorization Bearer, x-on-behalf-of, x-company-id. Positioned as the current primary interface for apps.
+    - protocol: WebSocket
+      scheme: wss
+      documented: true
+      note: >-
+        Bidirectional realtime messaging for apps, documented at
+        docs.whop.com/apps/features/websocket-guide. Connection is SDK-mediated
+        (@whop/react WhopWebsocketProvider / @whop/api connectToWebsocket); no
+        raw wss:// endpoint URL is published, so the modeled AsyncAPI server URL
+        is a placeholder.
+    - protocol: Webhook
+      scheme: https
+      documented: true
+      note: Outbound HTTP webhooks for memberships, payments, invoices, disputes, etc. Server-to-endpoint HTTP, not WebSocket.
+  apiGenerations:
+    - name: REST v1
+      status: current
+      base: https://api.whop.com/api/v1
+    - name: GraphQL
+      status: current
+      base: https://api.whop.com/public-graphql
+      note: Rate limit 10 req/10s, max complexity 1000, max depth 10.
+    - name: V5 REST
+      status: deprecated/legacy
+      note: Rate limit 20 req/10s.
+    - name: V2 REST
+      status: legacy
+      note: Rate limit 100 req/10s.
+  websocketDetail:
+    documented: true
+    sdkMediated: true
+    rawEndpointUrlPublished: false
+    reactHooks:
+      - WhopWebsocketProvider
+      - useBroadcastWebsocketMessage
+      - useOnWebsocketMessage
+    serverBroadcast: whopApi.websockets.sendMessage
+    nonReactConnect: connectToWebsocket (from @whop/api)
+    lifecycleEvents:
+      - connect
+      - disconnect
+      - connectionStatus
+    messageTargets:
+      - everyone
+      - experience
+      - custom channel
+sources:
+  - url: https://docs.whop.com/developer/api/getting-started
+    type: Documentation
+    note: REST base https://api.whop.com/api/v1; Bearer auth; three key types (Account, App, OAuth); MCP servers at mcp.whop.com.
+  - url: https://docs.whop.com/llms.txt
+    type: Documentation
+    note: Full API reference index - resource/operation catalog (memberships, payments, products, plans, users, companies, checkout, transfers, webhooks, promo codes, and many more).
+  - url: https://docs.whop.com/api-reference/memberships/list-memberships
+    type: APIReference
+    note: GET /memberships with documented query params and response fields.
+  - url: https://docs.whop.com/api-reference/payments/list-payments
+    type: APIReference
+    note: GET /payments with documented query params and PaymentListItem response fields.
+  - url: https://docs.whop.com/apps/features/websocket-guide
+    type: Documentation
+    note: Documents the realtime WebSocket - WhopWebsocketProvider, useBroadcastWebsocketMessage, useOnWebsocketMessage, whopApi.websockets.sendMessage, connection status events. SDK-mediated; no raw wss:// URL published.
+  - url: https://docs.whop.com/fees
+    type: Documentation
+    note: Fee schedule - 2.7% + $0.30 domestic processing, payout/dispute/fraud/tax/affiliate fees.
+actions:
+  asyncapiPath: asyncapi/whop-asyncapi.yml
+  apisYmlUpdated: true
+  reason: |
+    A documented bidirectional WebSocket transport exists for Whop apps, so the
+    review answer is true and an AsyncAPI 2.6 document was authored. The
+    document and this review are explicit that the connection is SDK-mediated
+    and that Whop does not publish a raw wss:// endpoint URL, so the modeled
+    server URL (realtime.whop.com) is flagged as a placeholder to avoid
+    misrepresenting an unpublished endpoint as verbatim.

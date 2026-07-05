@@ -1,0 +1,210 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Whop
+providerId: whop
+created: '2026-07-05'
+modified: '2026-07-05'
+reconciled: true
+tags:
+- Memberships
+- Payments
+- Creator Economy
+- Marketplace
+- Plans
+description: >-
+  Whop is free to start; there is no monthly platform subscription for the
+  core seller product. Whop instead earns transaction-based fees on payments
+  processed through the platform, plus payout, fraud, and optional
+  revenue-optimization fees. The numbers below are transaction fees a seller
+  pays Whop, not a subscription price for API access - the API itself is
+  included with a Whop account and gated by API keys.
+notes: >-
+  Fees are grounded against Whop's published fee schedule at
+  https://docs.whop.com/fees as of 2026-07-05; verify current values on
+  reconciliation. "Platform" gating fees for automated Discord/Telegram
+  community sales are widely reported at ~3% but are not itemized on the fees
+  page and are left out of the itemized entries below.
+sources:
+- https://docs.whop.com/fees
+- https://whop.com/network/pricing/
+- https://docs.whop.com/developer/api/getting-started
+plans:
+- id: whop-transaction-fees
+  name: Transaction Fees (Payment Processing)
+  type: usage
+  description: >-
+    Per-transaction payment processing fees charged by Whop on successful
+    sales. There is no monthly fee to use Whop or its API.
+  entries:
+  - label: Domestic card
+    name: card_domestic
+    type: usage
+    metric: transactions
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 2.7% + $0.30 per successful transaction
+    userMultiplied: false
+  - label: International card surcharge
+    name: card_international
+    type: usage
+    metric: transactions
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: additional 1.5% per transaction
+    userMultiplied: false
+  - label: Currency conversion
+    name: currency_conversion
+    type: usage
+    metric: transactions
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: additional 1% when conversion is required
+    userMultiplied: false
+  - label: ACH debit
+    name: ach_debit
+    type: usage
+    metric: transactions
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 1.5% (max $5) per successful ACH debit
+    userMultiplied: false
+  - label: Financing
+    name: financing
+    type: usage
+    metric: transactions
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 15% per successful financed transaction
+    userMultiplied: false
+  elements:
+  - name: Payments API
+  - name: Checkout Configurations
+- id: whop-payout-fees
+  name: Payout Fees
+  type: usage
+  description: Fees charged when withdrawing / paying out balances.
+  entries:
+  - label: Next-day ACH payout
+    name: payout_ach
+    type: usage
+    metric: payouts
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $2.50 per successful payout
+    userMultiplied: false
+  - label: Instant bank deposit (RTP)
+    name: payout_rtp
+    type: usage
+    metric: payouts
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 4% + $1.00 per successful payout
+    userMultiplied: false
+  - label: Crypto payout
+    name: payout_crypto
+    type: usage
+    metric: payouts
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 5% + $1.00 per successful payout
+    userMultiplied: false
+  - label: Bank wire
+    name: payout_wire
+    type: usage
+    metric: payouts
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $23.00 per successful payout
+    userMultiplied: false
+  elements:
+  - name: Transfers API
+- id: whop-risk-and-optimization-fees
+  name: Fraud, Disputes, and Revenue Optimization
+  type: usage
+  description: Optional and event-driven fees for fraud tooling, disputes, and revenue optimization.
+  entries:
+  - label: 3DS
+    name: fee_3ds
+    type: usage
+    metric: transactions
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0.03 per transaction
+    userMultiplied: false
+  - label: Radar (fraud)
+    name: fee_radar
+    type: usage
+    metric: transactions
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0.07 per transaction
+    userMultiplied: false
+  - label: Dispute
+    name: fee_dispute
+    type: usage
+    metric: disputes
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $15.00 per dispute
+    userMultiplied: false
+  - label: Early dispute alert
+    name: fee_dispute_alert
+    type: usage
+    metric: alerts
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $29.00 per alert
+    userMultiplied: false
+  - label: Tax and remittance
+    name: fee_tax
+    type: usage
+    metric: transactions
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 2% per transaction when tax is collected
+    userMultiplied: false
+  - label: Affiliate processing
+    name: fee_affiliate
+    type: usage
+    metric: transactions
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 1.25% per transaction
+    userMultiplied: false
+  elements:
+  - name: Disputes API
+  - name: Affiliates API
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

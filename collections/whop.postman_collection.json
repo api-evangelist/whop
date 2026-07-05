@@ -1,0 +1,198 @@
+{
+  "info": {
+    "name": "Whop REST API (v1)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [ { "key": "token", "value": "{{apiKey}}", "type": "string" } ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.whop.com/api/v1" }
+  ],
+  "item": [
+    {
+      "name": "Memberships",
+      "item": [
+        {
+          "name": "List memberships",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/memberships", "host": [ "{{baseUrl}}" ], "path": [ "memberships" ] }
+          }
+        },
+        {
+          "name": "Retrieve a membership",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/memberships/:id", "host": [ "{{baseUrl}}" ], "path": [ "memberships", ":id" ] }
+          }
+        },
+        {
+          "name": "Cancel a membership",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/memberships/:id/cancel", "host": [ "{{baseUrl}}" ], "path": [ "memberships", ":id", "cancel" ] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "List products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/products", "host": [ "{{baseUrl}}" ], "path": [ "products" ] }
+          }
+        },
+        {
+          "name": "Create a product",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\"title\":\"\"}" },
+            "url": { "raw": "{{baseUrl}}/products", "host": [ "{{baseUrl}}" ], "path": [ "products" ] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Plans",
+      "item": [
+        {
+          "name": "List plans",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/plans", "host": [ "{{baseUrl}}" ], "path": [ "plans" ] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "List payments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/payments", "host": [ "{{baseUrl}}" ], "path": [ "payments" ] }
+          }
+        },
+        {
+          "name": "Create a payment",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{}" },
+            "url": { "raw": "{{baseUrl}}/payments", "host": [ "{{baseUrl}}" ], "path": [ "payments" ] }
+          }
+        },
+        {
+          "name": "Refund a payment",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/payments/:id/refund", "host": [ "{{baseUrl}}" ], "path": [ "payments", ":id", "refund" ] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Retrieve a user",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/users/:id", "host": [ "{{baseUrl}}" ], "path": [ "users", ":id" ] }
+          }
+        },
+        {
+          "name": "Check user access",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/users/:id/check_access", "host": [ "{{baseUrl}}" ], "path": [ "users", ":id", "check_access" ] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Companies",
+      "item": [
+        {
+          "name": "List companies",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/companies", "host": [ "{{baseUrl}}" ], "path": [ "companies" ] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Checkout Configurations",
+      "item": [
+        {
+          "name": "Create a checkout configuration",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{}" },
+            "url": { "raw": "{{baseUrl}}/checkout_configurations", "host": [ "{{baseUrl}}" ], "path": [ "checkout_configurations" ] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Transfers",
+      "item": [
+        {
+          "name": "Create a transfer",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{}" },
+            "url": { "raw": "{{baseUrl}}/transfers", "host": [ "{{baseUrl}}" ], "path": [ "transfers" ] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Webhooks",
+      "item": [
+        {
+          "name": "Create a webhook",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\"url\":\"\",\"events\":[]}" },
+            "url": { "raw": "{{baseUrl}}/webhooks", "host": [ "{{baseUrl}}" ], "path": [ "webhooks" ] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Promo Codes",
+      "item": [
+        {
+          "name": "List promo codes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/promo_codes", "host": [ "{{baseUrl}}" ], "path": [ "promo_codes" ] }
+          }
+        }
+      ]
+    }
+  ]
+}
