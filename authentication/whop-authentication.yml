@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/whop-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: Whop API key
+  description: 'Bearer token authentication. Use a Company/Account API key or an App API key
+    in the `Authorization: Bearer <API_KEY>` header. OAuth access tokens are used when acting
+    on behalf of a signed-in Whop user.'
+  sources:
+  - openapi/whop-openapi.yml

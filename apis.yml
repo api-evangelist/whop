@@ -241,6 +241,10 @@ apis:
     @whop/api SDKs. Whop does not publish a raw wss:// endpoint URL; the base URL
     shown is a modeled placeholder (see the AsyncAPI document).
 common:
+- type: DomainSecurity
+  url: security/whop-domain-security.yml
+- type: Authentication
+  url: authentication/whop-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/whopio
 - type: LinkedIn

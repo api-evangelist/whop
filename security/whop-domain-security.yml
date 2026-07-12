@@ -1,0 +1,35 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: whop.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct  5 21:25:28 2026 GMT
+  hsts: true
+  hsts_max_age: 63072000
+- host: docs.whop.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 22 04:17:11 2026 GMT
+  hsts: true
+  hsts_max_age: 63072000
+- host: api.whop.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 26 20:00:39 2026 GMT
+  hsts: true
+  hsts_max_age: 63072000
+domains:
+- domain: whop.com
+  dnssec: false
+  caa:
+  - 0 issue "amazon.com"
+  - 0 issue "comodoca.com"
+  - 0 issue "digicert.com; cansignhttpexchanges=yes"
+  - 0 issue "letsencrypt.org"
+  - 0 issue "pki.goog; cansignhttpexchanges=yes"
+  - 0 issue "ssl.com"
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine
