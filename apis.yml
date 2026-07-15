@@ -241,6 +241,8 @@ apis:
     @whop/api SDKs. Whop does not publish a raw wss:// endpoint URL; the base URL
     shown is a modeled placeholder (see the AsyncAPI document).
 common:
+- type: AgenticAccess
+  url: agentic-access/whop-agentic-access.yml
 - type: DomainSecurity
   url: security/whop-domain-security.yml
 - type: Authentication
