@@ -1,0 +1,403 @@
+openapi: 3.0.3
+info:
+  title: Whop REST API (v1) Checkout Configurations Memberships API
+  description: 'The Whop REST API (v1) is the current primary REST surface for the Whop digital-products / memberships / creator-commerce platform. It lets applications manage memberships and access, products (access passes) and their pricing plans, take payments and issue refunds, manage users and companies, build checkout flows, pay out users via transfers, and register webhooks. All requests are authenticated with a Bearer token (`Authorization: Bearer <API_KEY>`); a Company/Account API key and an App API key are the two key types, with OAuth tokens used when acting on behalf of a signed-in Whop user.
+
+    Grounding notes: base URLs, the Bearer scheme, the `List memberships` and `List payments` query parameters and response fields, and the resource / operation catalog are taken from Whop''s published documentation at docs.whop.com (see the docs `llms.txt` index). Individual action sub-paths (for example the cancel / pause / resume membership actions) are modeled from the documented operation names; verify exact path segments against the live reference on reconciliation.'
+  version: '1.0'
+  contact:
+    name: API Evangelist
+    email: kin@apievangelist.com
+    url: https://apievangelist.com
+  license:
+    name: API documentation - Whop Terms of Service
+    url: https://whop.com/terms-of-service/
+servers:
+- url: https://api.whop.com/api/v1
+  description: Production
+- url: https://sandbox-api.whop.com/api/v1
+  description: Sandbox
+security:
+- bearerAuth: []
+tags:
+- name: Memberships
+  description: A user's access to a product; lifecycle and access management.
+paths:
+  /memberships:
+    get:
+      operationId: listMemberships
+      tags:
+      - Memberships
+      summary: List memberships
+      description: Returns a cursor-paginated list of memberships. `company_id` is required when authenticating with an API key.
+      parameters:
+      - name: after
+        in: query
+        schema:
+          type: string
+        description: Cursor for forward pagination.
+      - name: before
+        in: query
+        schema:
+          type: string
+        description: Cursor for backward pagination.
+      - name: first
+        in: query
+        schema:
+          type: integer
+        description: Return the first n elements.
+      - name: last
+        in: query
+        schema:
+          type: integer
+        description: Return the last n elements.
+      - name: company_id
+        in: query
+        schema:
+          type: string
+        description: Filter by company; required for API keys.
+      - name: direction
+        in: query
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+        description: Sort direction.
+      - name: order
+        in: query
+        schema:
+          type: string
+          enum:
+          - id
+          - created_at
+          - status
+          - canceled_at
+          - date_joined
+          - total_spend
+        description: Sort field.
+      - name: product_ids
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+        description: Filter by product identifiers.
+      - name: plan_ids
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+        description: Filter by plan identifiers.
+      - name: user_ids
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+        description: Filter by user identifiers.
+      - name: statuses
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+        description: Filter by membership status.
+      - name: cancel_options
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+        description: Filter by cancellation reason.
+      - name: promo_code_ids
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+        description: Filter by applied promo codes.
+      - name: created_before
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: created_after
+        in: query
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: A page of memberships.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Membership'
+                  page_info:
+                    $ref: '#/components/schemas/PageInfo'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /memberships/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The membership ID.
+    get:
+      operationId: retrieveMembership
+      tags:
+      - Memberships
+      summary: Retrieve a membership
+      responses:
+        '200':
+          description: A membership.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Membership'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      operationId: updateMembership
+      tags:
+      - Memberships
+      summary: Update a membership
+      description: Update mutable fields on a membership (for example metadata).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: The updated membership.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Membership'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /memberships/{id}/add_free_days:
+    post:
+      operationId: addFreeDaysMembership
+      tags:
+      - Memberships
+      summary: Add free days to a membership
+      description: Extends the current renewal period by a number of free days. Path segment modeled from the documented `add-free-days` operation.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                days:
+                  type: integer
+              required:
+              - days
+      responses:
+        '200':
+          description: The updated membership.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Membership'
+  /memberships/{id}/cancel:
+    post:
+      operationId: cancelMembership
+      tags:
+      - Memberships
+      summary: Cancel a membership
+      description: Cancels a membership immediately or at period end. Path segment modeled from the documented `cancel` operation.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The canceled membership.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Membership'
+  /memberships/{id}/uncancel:
+    post:
+      operationId: uncancelMembership
+      tags:
+      - Memberships
+      summary: Uncancel a membership
+      description: Reverses a scheduled cancellation. Path segment modeled from the documented `uncancel` operation.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The membership.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Membership'
+  /memberships/{id}/pause:
+    post:
+      operationId: pauseMembership
+      tags:
+      - Memberships
+      summary: Pause a membership
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The paused membership.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Membership'
+  /memberships/{id}/resume:
+    post:
+      operationId: resumeMembership
+      tags:
+      - Memberships
+      summary: Resume a membership
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The resumed membership.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Membership'
+components:
+  schemas:
+    PageInfo:
+      type: object
+      description: Cursor pagination metadata.
+      properties:
+        has_next_page:
+          type: boolean
+        has_previous_page:
+          type: boolean
+        start_cursor:
+          type: string
+          nullable: true
+        end_cursor:
+          type: string
+          nullable: true
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+    Membership:
+      type: object
+      description: A user's access to a product. Fields taken from the documented List memberships response.
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+          description: Lifecycle state (for example active, trialing, past_due, canceled).
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        joined_at:
+          type: string
+          format: date-time
+          nullable: true
+        canceled_at:
+          type: string
+          format: date-time
+          nullable: true
+        renewal_period_start:
+          type: string
+          format: date-time
+          nullable: true
+        renewal_period_end:
+          type: string
+          format: date-time
+          nullable: true
+        cancel_at_period_end:
+          type: boolean
+        currency:
+          type: string
+        license_key:
+          type: string
+          nullable: true
+        manage_url:
+          type: string
+          nullable: true
+        checkout_configuration_id:
+          type: string
+          nullable: true
+        metadata:
+          type: object
+          additionalProperties: true
+        user:
+          type: object
+          additionalProperties: true
+        member:
+          type: object
+          additionalProperties: true
+        company:
+          type: object
+          additionalProperties: true
+        product:
+          type: object
+          additionalProperties: true
+        plan:
+          type: object
+          additionalProperties: true
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: Whop API key
+      description: 'Bearer token authentication. Use a Company/Account API key or an App API key in the `Authorization: Bearer <API_KEY>` header. OAuth access tokens are used when acting on behalf of a signed-in Whop user.'

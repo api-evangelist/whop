@@ -1,0 +1,163 @@
+openapi: 3.0.3
+info:
+  title: Whop REST API (v1) Checkout Configurations Companies API
+  description: 'The Whop REST API (v1) is the current primary REST surface for the Whop digital-products / memberships / creator-commerce platform. It lets applications manage memberships and access, products (access passes) and their pricing plans, take payments and issue refunds, manage users and companies, build checkout flows, pay out users via transfers, and register webhooks. All requests are authenticated with a Bearer token (`Authorization: Bearer <API_KEY>`); a Company/Account API key and an App API key are the two key types, with OAuth tokens used when acting on behalf of a signed-in Whop user.
+
+    Grounding notes: base URLs, the Bearer scheme, the `List memberships` and `List payments` query parameters and response fields, and the resource / operation catalog are taken from Whop''s published documentation at docs.whop.com (see the docs `llms.txt` index). Individual action sub-paths (for example the cancel / pause / resume membership actions) are modeled from the documented operation names; verify exact path segments against the live reference on reconciliation.'
+  version: '1.0'
+  contact:
+    name: API Evangelist
+    email: kin@apievangelist.com
+    url: https://apievangelist.com
+  license:
+    name: API documentation - Whop Terms of Service
+    url: https://whop.com/terms-of-service/
+servers:
+- url: https://api.whop.com/api/v1
+  description: Production
+- url: https://sandbox-api.whop.com/api/v1
+  description: Sandbox
+security:
+- bearerAuth: []
+tags:
+- name: Companies
+  description: Seller companies (whops) and sub-merchant onboarding.
+paths:
+  /companies:
+    get:
+      operationId: listCompanies
+      tags:
+      - Companies
+      summary: List companies
+      responses:
+        '200':
+          description: A page of companies.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Company'
+                  page_info:
+                    $ref: '#/components/schemas/PageInfo'
+    post:
+      operationId: createCompany
+      tags:
+      - Companies
+      summary: Create a company
+      description: Onboard a sub-merchant company under a platform account.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Company'
+      responses:
+        '201':
+          description: The created company.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+  /companies/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: retrieveCompany
+      tags:
+      - Companies
+      summary: Retrieve a company
+      responses:
+        '200':
+          description: A company.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+    post:
+      operationId: updateCompany
+      tags:
+      - Companies
+      summary: Update a company
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Company'
+      responses:
+        '200':
+          description: The updated company.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+  /companies/{id}/api_keys:
+    post:
+      operationId: createChildCompanyApiKey
+      tags:
+      - Companies
+      summary: Create a child company API key
+      description: Mints an API key for a sub-merchant company. Path segment modeled from the documented `create-child-company-api-key` operation.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: The created API key.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  api_key:
+                    type: string
+components:
+  schemas:
+    PageInfo:
+      type: object
+      description: Cursor pagination metadata.
+      properties:
+        has_next_page:
+          type: boolean
+        has_previous_page:
+          type: boolean
+        start_cursor:
+          type: string
+          nullable: true
+        end_cursor:
+          type: string
+          nullable: true
+    Company:
+      type: object
+      description: A seller company (whop) or sub-merchant.
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        route:
+          type: string
+          nullable: true
+        image_url:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: Whop API key
+      description: 'Bearer token authentication. Use a Company/Account API key or an App API key in the `Authorization: Bearer <API_KEY>` header. OAuth access tokens are used when acting on behalf of a signed-in Whop user.'

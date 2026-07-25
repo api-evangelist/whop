@@ -1,0 +1,317 @@
+openapi: 3.0.3
+info:
+  title: Whop REST API (v1) Checkout Configurations Payments API
+  description: 'The Whop REST API (v1) is the current primary REST surface for the Whop digital-products / memberships / creator-commerce platform. It lets applications manage memberships and access, products (access passes) and their pricing plans, take payments and issue refunds, manage users and companies, build checkout flows, pay out users via transfers, and register webhooks. All requests are authenticated with a Bearer token (`Authorization: Bearer <API_KEY>`); a Company/Account API key and an App API key are the two key types, with OAuth tokens used when acting on behalf of a signed-in Whop user.
+
+    Grounding notes: base URLs, the Bearer scheme, the `List memberships` and `List payments` query parameters and response fields, and the resource / operation catalog are taken from Whop''s published documentation at docs.whop.com (see the docs `llms.txt` index). Individual action sub-paths (for example the cancel / pause / resume membership actions) are modeled from the documented operation names; verify exact path segments against the live reference on reconciliation.'
+  version: '1.0'
+  contact:
+    name: API Evangelist
+    email: kin@apievangelist.com
+    url: https://apievangelist.com
+  license:
+    name: API documentation - Whop Terms of Service
+    url: https://whop.com/terms-of-service/
+servers:
+- url: https://api.whop.com/api/v1
+  description: Production
+- url: https://sandbox-api.whop.com/api/v1
+  description: Sandbox
+security:
+- bearerAuth: []
+tags:
+- name: Payments
+  description: Charges, refunds, retries, and voids.
+paths:
+  /payments:
+    get:
+      operationId: listPayments
+      tags:
+      - Payments
+      summary: List payments
+      parameters:
+      - name: after
+        in: query
+        schema:
+          type: string
+      - name: before
+        in: query
+        schema:
+          type: string
+      - name: first
+        in: query
+        schema:
+          type: integer
+      - name: last
+        in: query
+        schema:
+          type: integer
+      - name: company_id
+        in: query
+        schema:
+          type: string
+      - name: direction
+        in: query
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      - name: order
+        in: query
+        schema:
+          type: string
+          enum:
+          - final_amount
+          - created_at
+          - paid_at
+      - name: product_ids
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: plan_ids
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: statuses
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: substatuses
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: billing_reasons
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: currencies
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: created_before
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: created_after
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: null
+        in: query
+        schema:
+          type: string
+        description: Search by user ID
+        email: null
+        or username.: null
+      - name: include_free
+        in: query
+        schema:
+          type: boolean
+        description: Include zero-amount payments.
+      responses:
+        '200':
+          description: A page of payments.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Payment'
+                  page_info:
+                    $ref: '#/components/schemas/PageInfo'
+    post:
+      operationId: createPayment
+      tags:
+      - Payments
+      summary: Create a payment
+      description: Charge a saved payment method off-session for a member.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '201':
+          description: The created payment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+  /payments/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: retrievePayment
+      tags:
+      - Payments
+      summary: Retrieve a payment
+      responses:
+        '200':
+          description: A payment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+  /payments/{id}/refund:
+    post:
+      operationId: refundPayment
+      tags:
+      - Payments
+      summary: Refund a payment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The refunded payment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+  /payments/{id}/retry:
+    post:
+      operationId: retryPayment
+      tags:
+      - Payments
+      summary: Retry a failed payment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The payment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+  /payments/{id}/void:
+    post:
+      operationId: voidPayment
+      tags:
+      - Payments
+      summary: Void a payment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The voided payment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+components:
+  schemas:
+    Payment:
+      type: object
+      description: A payment. Fields taken from the documented List payments (PaymentListItem) response.
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+        substatus:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        paid_at:
+          type: string
+          format: date-time
+          nullable: true
+        total:
+          type: number
+        subtotal:
+          type: number
+        currency:
+          type: string
+        refunded_amount:
+          type: number
+          nullable: true
+        card_last4:
+          type: string
+          nullable: true
+        billing_reason:
+          type: string
+          nullable: true
+        failure_message:
+          type: string
+          nullable: true
+        user:
+          type: object
+          additionalProperties: true
+        plan:
+          type: object
+          additionalProperties: true
+        product:
+          type: object
+          additionalProperties: true
+        membership:
+          type: object
+          additionalProperties: true
+        payment_method:
+          type: object
+          additionalProperties: true
+        company:
+          type: object
+          additionalProperties: true
+        promo_code:
+          type: object
+          additionalProperties: true
+          nullable: true
+    PageInfo:
+      type: object
+      description: Cursor pagination metadata.
+      properties:
+        has_next_page:
+          type: boolean
+        has_previous_page:
+          type: boolean
+        start_cursor:
+          type: string
+          nullable: true
+        end_cursor:
+          type: string
+          nullable: true
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: Whop API key
+      description: 'Bearer token authentication. Use a Company/Account API key or an App API key in the `Authorization: Bearer <API_KEY>` header. OAuth access tokens are used when acting on behalf of a signed-in Whop user.'

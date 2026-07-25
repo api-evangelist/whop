@@ -1,0 +1,170 @@
+openapi: 3.0.3
+info:
+  title: Whop REST API (v1) Checkout Configurations Users API
+  description: 'The Whop REST API (v1) is the current primary REST surface for the Whop digital-products / memberships / creator-commerce platform. It lets applications manage memberships and access, products (access passes) and their pricing plans, take payments and issue refunds, manage users and companies, build checkout flows, pay out users via transfers, and register webhooks. All requests are authenticated with a Bearer token (`Authorization: Bearer <API_KEY>`); a Company/Account API key and an App API key are the two key types, with OAuth tokens used when acting on behalf of a signed-in Whop user.
+
+    Grounding notes: base URLs, the Bearer scheme, the `List memberships` and `List payments` query parameters and response fields, and the resource / operation catalog are taken from Whop''s published documentation at docs.whop.com (see the docs `llms.txt` index). Individual action sub-paths (for example the cancel / pause / resume membership actions) are modeled from the documented operation names; verify exact path segments against the live reference on reconciliation.'
+  version: '1.0'
+  contact:
+    name: API Evangelist
+    email: kin@apievangelist.com
+    url: https://apievangelist.com
+  license:
+    name: API documentation - Whop Terms of Service
+    url: https://whop.com/terms-of-service/
+servers:
+- url: https://api.whop.com/api/v1
+  description: Production
+- url: https://sandbox-api.whop.com/api/v1
+  description: Sandbox
+security:
+- bearerAuth: []
+tags:
+- name: Users
+  description: Whop users and their access checks.
+paths:
+  /users:
+    get:
+      operationId: listUsers
+      tags:
+      - Users
+      summary: List users
+      parameters:
+      - name: company_id
+        in: query
+        schema:
+          type: string
+      - name: after
+        in: query
+        schema:
+          type: string
+      - name: first
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: A page of users.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+                  page_info:
+                    $ref: '#/components/schemas/PageInfo'
+  /users/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: retrieveUser
+      tags:
+      - Users
+      summary: Retrieve a user
+      responses:
+        '200':
+          description: A user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    post:
+      operationId: updateUser
+      tags:
+      - Users
+      summary: Update a user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: The updated user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /users/{id}/check_access:
+    get:
+      operationId: checkUserAccess
+      tags:
+      - Users
+      summary: Check user access
+      description: Checks whether a user has access to a given access pass / experience. Path segment modeled from the documented `check-user-access` operation.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: access_pass_id
+        in: query
+        schema:
+          type: string
+      - name: experience_id
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Access check result.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  has_access:
+                    type: boolean
+                  access_level:
+                    type: string
+components:
+  schemas:
+    User:
+      type: object
+      description: A Whop user.
+      properties:
+        id:
+          type: string
+        username:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+        profile_pic_url:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+    PageInfo:
+      type: object
+      description: Cursor pagination metadata.
+      properties:
+        has_next_page:
+          type: boolean
+        has_previous_page:
+          type: boolean
+        start_cursor:
+          type: string
+          nullable: true
+        end_cursor:
+          type: string
+          nullable: true
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: Whop API key
+      description: 'Bearer token authentication. Use a Company/Account API key or an App API key in the `Authorization: Bearer <API_KEY>` header. OAuth access tokens are used when acting on behalf of a signed-in Whop user.'
