@@ -14,7 +14,20 @@ description: >-
   framework, JavaScript/Python/Ruby SDKs, OAuth, and a realtime WebSocket for
   apps. Whop is free to start and monetizes through transaction fees rather than
   a subscription for API access.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/whop.png
 tags:
 - Memberships
 - Payments
@@ -27,180 +40,6 @@ created: '2026-07-05'
 modified: '2026-07-05'
 specificationVersion: '0.19'
 apis:
-- aid: whop:whop-memberships-api
-  name: Whop Memberships API
-  tags:
-  - Memberships
-  - Access Control
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.whop.com/api-reference/memberships/list-memberships
-  baseURL: https://api.whop.com/api/v1
-  properties:
-  - url: https://docs.whop.com/developer/api/getting-started
-    type: Documentation
-  - url: https://docs.whop.com/api-reference/memberships/list-memberships
-    type: APIReference
-  - url: openapi/whop-openapi.yml
-    type: OpenAPI
-  - url: collections/whop.opencollection.json
-    type: OpenCollection
-  - url: collections/whop.postman_collection.json
-    type: PostmanCollection
-  description: >-
-    List, retrieve, and manage the lifecycle of memberships - a user's access to
-    a product - including cancel, uncancel, pause, resume, add free days, and
-    membership webhooks (activated, deactivated, trial ending).
-- aid: whop:whop-products-api
-  name: Whop Products API
-  tags:
-  - Products
-  - Access Passes
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.whop.com/api-reference/products/product
-  baseURL: https://api.whop.com/api/v1
-  properties:
-  - url: https://docs.whop.com/api-reference/products/product
-    type: APIReference
-  - url: openapi/whop-openapi.yml
-    type: OpenAPI
-  - url: collections/whop.opencollection.json
-    type: OpenCollection
-  description: >-
-    Create, list, retrieve, update, and delete products (access passes) - the
-    sellable offerings a company lists, which contain plans for pricing and
-    carry custom metadata surfaced in webhook payloads.
-- aid: whop:whop-plans-api
-  name: Whop Plans API
-  tags:
-  - Plans
-  - Pricing
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.whop.com/api-reference/plans/plan
-  baseURL: https://api.whop.com/api/v1
-  properties:
-  - url: https://docs.whop.com/api-reference/plans/plan
-    type: APIReference
-  - url: openapi/whop-openapi.yml
-    type: OpenAPI
-  description: >-
-    Create, list, retrieve, update, and delete pricing plans attached to
-    products (one-time and recurring), and calculate tax for a plan at a given
-    billing address.
-- aid: whop:whop-payments-api
-  name: Whop Payments API
-  tags:
-  - Payments
-  - Refunds
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.whop.com/api-reference/payments/list-payments
-  baseURL: https://api.whop.com/api/v1
-  properties:
-  - url: https://docs.whop.com/api-reference/payments/list-payments
-    type: APIReference
-  - url: openapi/whop-openapi.yml
-    type: OpenAPI
-  - url: collections/whop.postman_collection.json
-    type: PostmanCollection
-  description: >-
-    List and retrieve payments with rich filtering, create off-session charges
-    against saved payment methods, list fees, and refund, retry, or void a
-    payment, plus payment lifecycle webhooks.
-- aid: whop:whop-users-api
-  name: Whop Users API
-  tags:
-  - Users
-  - Access Checks
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.whop.com/api-reference/users/user
-  baseURL: https://api.whop.com/api/v1
-  properties:
-  - url: https://docs.whop.com/api-reference/users/user
-    type: APIReference
-  - url: openapi/whop-openapi.yml
-    type: OpenAPI
-  description: >-
-    Retrieve and list users, update the current user, and check whether a user
-    has access to a given access pass or experience.
-- aid: whop:whop-companies-api
-  name: Whop Companies API
-  tags:
-  - Companies
-  - Sub-Merchants
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.whop.com/api-reference/companies/company
-  baseURL: https://api.whop.com/api/v1
-  properties:
-  - url: https://docs.whop.com/api-reference/companies/company
-    type: APIReference
-  - url: openapi/whop-openapi.yml
-    type: OpenAPI
-  description: >-
-    Create, list, retrieve, and update companies (whops), onboard sub-merchants
-    under a platform account, and mint child-company API keys.
-- aid: whop:whop-checkout-configurations-api
-  name: Whop Checkout Configurations API
-  tags:
-  - Checkout
-  - Payment Flows
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.whop.com/api-reference/checkout-configurations/create-a-checkout-configuration
-  baseURL: https://api.whop.com/api/v1
-  properties:
-  - url: https://docs.whop.com/api-reference/checkout-configurations/create-a-checkout-configuration
-    type: APIReference
-  - url: openapi/whop-openapi.yml
-    type: OpenAPI
-  description: >-
-    Create, list, retrieve, and delete reusable checkout configurations that
-    define custom payment flows, saved payment methods, and off-session charging.
-- aid: whop:whop-transfers-api
-  name: Whop Transfers API
-  tags:
-  - Transfers
-  - Payouts
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.whop.com/api-reference/transfers/create-transfer
-  baseURL: https://api.whop.com/api/v1
-  properties:
-  - url: https://docs.whop.com/api-reference/transfers/create-transfer
-    type: APIReference
-  - url: openapi/whop-openapi.yml
-    type: OpenAPI
-  description: >-
-    Programmatically pay out users and connected ledger accounts, and list and
-    retrieve transfers.
-- aid: whop:whop-webhooks-api
-  name: Whop Webhooks API
-  tags:
-  - Webhooks
-  - Events
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.whop.com/api-reference/webhooks/webhook
-  baseURL: https://api.whop.com/api/v1
-  properties:
-  - url: https://docs.whop.com/api-reference/webhooks/webhook
-    type: APIReference
-  - url: openapi/whop-openapi.yml
-    type: OpenAPI
-  description: >-
-    Register and manage webhook endpoints that receive platform events for
-    memberships, payments, invoices, disputes, and more.
-- aid: whop:whop-promo-codes-api
-  name: Whop Promo Codes API
-  tags:
-  - Promo Codes
-  - Discounts
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.whop.com/api-reference/promo-codes/promo-code
-  baseURL: https://api.whop.com/api/v1
-  properties:
-  - url: https://docs.whop.com/api-reference/promo-codes/promo-code
-    type: APIReference
-  - url: openapi/whop-openapi.yml
-    type: OpenAPI
-  description: >-
-    Create, list, retrieve, update, and delete promo / discount codes applied
-    at checkout.
 - aid: whop:whop-graphql-api
   name: Whop GraphQL API
   tags:
@@ -217,10 +56,9 @@ apis:
   - url: graphql/whop-schema.graphql
     type: GraphQL
   description: >-
-    Whop's GraphQL API at api.whop.com/public-graphql, positioned as the current
-    primary interface for building apps - search/discovery, access passes,
-    plans, memberships, users, and messaging - authenticated with a Bearer token
-    plus optional x-on-behalf-of and x-company-id context headers.
+    Whop's GraphQL API at api.whop.com/public-graphql, positioned as the current primary interface for
+    building apps - search/discovery, access passes, plans, memberships, users, and messaging - authenticated
+    with a Bearer token plus optional x-on-behalf-of and x-company-id context headers.
 - aid: whop:whop-realtime-websocket-api
   name: Whop Realtime WebSocket API
   tags:
@@ -236,10 +74,379 @@ apis:
   - url: asyncapi/whop-asyncapi.yml
     type: AsyncAPI
   description: >-
-    Bidirectional realtime WebSocket for Whop apps - custom app messages and
-    chat/feed updates - connected and authenticated through the @whop/react and
-    @whop/api SDKs. Whop does not publish a raw wss:// endpoint URL; the base URL
-    shown is a modeled placeholder (see the AsyncAPI document).
+    Bidirectional realtime WebSocket for Whop apps - custom app messages and chat/feed updates - connected
+    and authenticated through the @whop/react and @whop/api SDKs. Whop does not publish a raw wss:// endpoint
+    URL; the base URL shown is a modeled placeholder (see the AsyncAPI document).
+- aid: whop:whop-checkout-configurations-api
+  name: Whop Checkout Configurations API
+  description: Reusable checkout / payment flow configurations.
+  humanURL: https://docs.whop.com/api-reference/memberships/list-memberships
+  baseURL: https://api.whop.com/api/v1
+  tags:
+  - Checkout Configurations
+  properties:
+  - type: OpenAPI
+    url: openapi/whop-checkout-configurations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.whop.com/developer/api/getting-started
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/memberships/list-memberships
+  - type: OpenCollection
+    url: collections/whop.opencollection.json
+  - type: PostmanCollection
+    url: collections/whop.postman_collection.json
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/products/product
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/plans/plan
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/payments/list-payments
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/users/user
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/companies/company
+  - type: APIReference
+    url: >-
+      https://docs.whop.com/api-reference/checkout-configurations/create-a-checkout-configuration
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/transfers/create-transfer
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/webhooks/webhook
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/promo-codes/promo-code
+- aid: whop:whop-companies-api
+  name: Whop Companies API
+  description: Seller companies (whops) and sub-merchant onboarding.
+  humanURL: https://docs.whop.com/api-reference/memberships/list-memberships
+  baseURL: https://api.whop.com/api/v1
+  tags:
+  - Companies
+  properties:
+  - type: OpenAPI
+    url: openapi/whop-companies-api-openapi.yml
+  - type: Documentation
+    url: https://docs.whop.com/developer/api/getting-started
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/memberships/list-memberships
+  - type: OpenCollection
+    url: collections/whop.opencollection.json
+  - type: PostmanCollection
+    url: collections/whop.postman_collection.json
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/products/product
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/plans/plan
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/payments/list-payments
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/users/user
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/companies/company
+  - type: APIReference
+    url: >-
+      https://docs.whop.com/api-reference/checkout-configurations/create-a-checkout-configuration
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/transfers/create-transfer
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/webhooks/webhook
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/promo-codes/promo-code
+- aid: whop:whop-memberships-api
+  name: Whop Memberships API
+  description: A user's access to a product; lifecycle and access management.
+  humanURL: https://docs.whop.com/api-reference/memberships/list-memberships
+  baseURL: https://api.whop.com/api/v1
+  tags:
+  - Memberships
+  properties:
+  - type: OpenAPI
+    url: openapi/whop-memberships-api-openapi.yml
+  - type: Documentation
+    url: https://docs.whop.com/developer/api/getting-started
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/memberships/list-memberships
+  - type: OpenCollection
+    url: collections/whop.opencollection.json
+  - type: PostmanCollection
+    url: collections/whop.postman_collection.json
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/products/product
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/plans/plan
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/payments/list-payments
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/users/user
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/companies/company
+  - type: APIReference
+    url: >-
+      https://docs.whop.com/api-reference/checkout-configurations/create-a-checkout-configuration
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/transfers/create-transfer
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/webhooks/webhook
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/promo-codes/promo-code
+- aid: whop:whop-payments-api
+  name: Whop Payments API
+  description: Charges, refunds, retries, and voids.
+  humanURL: https://docs.whop.com/api-reference/memberships/list-memberships
+  baseURL: https://api.whop.com/api/v1
+  tags:
+  - Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/whop-payments-api-openapi.yml
+  - type: Documentation
+    url: https://docs.whop.com/developer/api/getting-started
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/memberships/list-memberships
+  - type: OpenCollection
+    url: collections/whop.opencollection.json
+  - type: PostmanCollection
+    url: collections/whop.postman_collection.json
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/products/product
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/plans/plan
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/payments/list-payments
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/users/user
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/companies/company
+  - type: APIReference
+    url: >-
+      https://docs.whop.com/api-reference/checkout-configurations/create-a-checkout-configuration
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/transfers/create-transfer
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/webhooks/webhook
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/promo-codes/promo-code
+- aid: whop:whop-plans-api
+  name: Whop Plans API
+  description: Pricing plans attached to products.
+  humanURL: https://docs.whop.com/api-reference/memberships/list-memberships
+  baseURL: https://api.whop.com/api/v1
+  tags:
+  - Plans
+  properties:
+  - type: OpenAPI
+    url: openapi/whop-plans-api-openapi.yml
+  - type: Documentation
+    url: https://docs.whop.com/developer/api/getting-started
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/memberships/list-memberships
+  - type: OpenCollection
+    url: collections/whop.opencollection.json
+  - type: PostmanCollection
+    url: collections/whop.postman_collection.json
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/products/product
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/plans/plan
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/payments/list-payments
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/users/user
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/companies/company
+  - type: APIReference
+    url: >-
+      https://docs.whop.com/api-reference/checkout-configurations/create-a-checkout-configuration
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/transfers/create-transfer
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/webhooks/webhook
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/promo-codes/promo-code
+- aid: whop:whop-products-api
+  name: Whop Products API
+  description: Products (access passes) that companies sell.
+  humanURL: https://docs.whop.com/api-reference/memberships/list-memberships
+  baseURL: https://api.whop.com/api/v1
+  tags:
+  - Products
+  properties:
+  - type: OpenAPI
+    url: openapi/whop-products-api-openapi.yml
+  - type: Documentation
+    url: https://docs.whop.com/developer/api/getting-started
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/memberships/list-memberships
+  - type: OpenCollection
+    url: collections/whop.opencollection.json
+  - type: PostmanCollection
+    url: collections/whop.postman_collection.json
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/products/product
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/plans/plan
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/payments/list-payments
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/users/user
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/companies/company
+  - type: APIReference
+    url: >-
+      https://docs.whop.com/api-reference/checkout-configurations/create-a-checkout-configuration
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/transfers/create-transfer
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/webhooks/webhook
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/promo-codes/promo-code
+- aid: whop:whop-promo-codes-api
+  name: Whop Promo Codes API
+  description: Discount / promo codes applied at checkout.
+  humanURL: https://docs.whop.com/api-reference/memberships/list-memberships
+  baseURL: https://api.whop.com/api/v1
+  tags:
+  - Promo Codes
+  properties:
+  - type: OpenAPI
+    url: openapi/whop-promo-codes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.whop.com/developer/api/getting-started
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/memberships/list-memberships
+  - type: OpenCollection
+    url: collections/whop.opencollection.json
+  - type: PostmanCollection
+    url: collections/whop.postman_collection.json
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/products/product
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/plans/plan
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/payments/list-payments
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/users/user
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/companies/company
+  - type: APIReference
+    url: >-
+      https://docs.whop.com/api-reference/checkout-configurations/create-a-checkout-configuration
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/transfers/create-transfer
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/webhooks/webhook
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/promo-codes/promo-code
+- aid: whop:whop-transfers-api
+  name: Whop Transfers API
+  description: Programmatic payouts to users and connected accounts.
+  humanURL: https://docs.whop.com/api-reference/memberships/list-memberships
+  baseURL: https://api.whop.com/api/v1
+  tags:
+  - Transfers
+  properties:
+  - type: OpenAPI
+    url: openapi/whop-transfers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.whop.com/developer/api/getting-started
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/memberships/list-memberships
+  - type: OpenCollection
+    url: collections/whop.opencollection.json
+  - type: PostmanCollection
+    url: collections/whop.postman_collection.json
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/products/product
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/plans/plan
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/payments/list-payments
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/users/user
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/companies/company
+  - type: APIReference
+    url: >-
+      https://docs.whop.com/api-reference/checkout-configurations/create-a-checkout-configuration
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/transfers/create-transfer
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/webhooks/webhook
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/promo-codes/promo-code
+- aid: whop:whop-users-api
+  name: Whop Users API
+  description: Whop users and their access checks.
+  humanURL: https://docs.whop.com/api-reference/memberships/list-memberships
+  baseURL: https://api.whop.com/api/v1
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/whop-users-api-openapi.yml
+  - type: Documentation
+    url: https://docs.whop.com/developer/api/getting-started
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/memberships/list-memberships
+  - type: OpenCollection
+    url: collections/whop.opencollection.json
+  - type: PostmanCollection
+    url: collections/whop.postman_collection.json
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/products/product
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/plans/plan
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/payments/list-payments
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/users/user
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/companies/company
+  - type: APIReference
+    url: >-
+      https://docs.whop.com/api-reference/checkout-configurations/create-a-checkout-configuration
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/transfers/create-transfer
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/webhooks/webhook
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/promo-codes/promo-code
+- aid: whop:whop-webhooks-api
+  name: Whop Webhooks API
+  description: Webhook endpoint registration for platform events.
+  humanURL: https://docs.whop.com/api-reference/memberships/list-memberships
+  baseURL: https://api.whop.com/api/v1
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/whop-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.whop.com/developer/api/getting-started
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/memberships/list-memberships
+  - type: OpenCollection
+    url: collections/whop.opencollection.json
+  - type: PostmanCollection
+    url: collections/whop.postman_collection.json
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/products/product
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/plans/plan
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/payments/list-payments
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/users/user
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/companies/company
+  - type: APIReference
+    url: >-
+      https://docs.whop.com/api-reference/checkout-configurations/create-a-checkout-configuration
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/transfers/create-transfer
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/webhooks/webhook
+  - type: APIReference
+    url: https://docs.whop.com/api-reference/promo-codes/promo-code
 common:
 - type: AgenticAccess
   url: agentic-access/whop-agentic-access.yml
