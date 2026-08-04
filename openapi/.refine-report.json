@@ -1,0 +1,32 @@
+{
+  "provider": "whop",
+  "sources": [
+    "whop-checkout-configurations-api-openapi.yml",
+    "whop-companies-api-openapi.yml",
+    "whop-memberships-api-openapi.yml",
+    "whop-payments-api-openapi.yml",
+    "whop-plans-api-openapi.yml",
+    "whop-products-api-openapi.yml",
+    "whop-promo-codes-api-openapi.yml",
+    "whop-transfers-api-openapi.yml",
+    "whop-users-api-openapi.yml",
+    "whop-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "whop-checkout-configurations-api-openapi.yml",
+    "whop-companies-api-openapi.yml",
+    "whop-memberships-api-openapi.yml",
+    "whop-payments-api-openapi.yml",
+    "whop-plans-api-openapi.yml",
+    "whop-products-api-openapi.yml",
+    "whop-promo-codes-api-openapi.yml",
+    "whop-transfers-api-openapi.yml",
+    "whop-users-api-openapi.yml",
+    "whop-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

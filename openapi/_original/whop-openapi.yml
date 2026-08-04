@@ -1,0 +1,879 @@
+openapi: 3.0.3
+info:
+  title: Whop REST API (v1)
+  description: >-
+    The Whop REST API (v1) is the current primary REST surface for the Whop
+    digital-products / memberships / creator-commerce platform. It lets
+    applications manage memberships and access, products (access passes) and
+    their pricing plans, take payments and issue refunds, manage users and
+    companies, build checkout flows, pay out users via transfers, and register
+    webhooks. All requests are authenticated with a Bearer token
+    (`Authorization: Bearer <API_KEY>`); a Company/Account API key and an App
+    API key are the two key types, with OAuth tokens used when acting on behalf
+    of a signed-in Whop user.
+
+    Grounding notes: base URLs, the Bearer scheme, the `List memberships` and
+    `List payments` query parameters and response fields, and the resource /
+    operation catalog are taken from Whop's published documentation at
+    docs.whop.com (see the docs `llms.txt` index). Individual action sub-paths
+    (for example the cancel / pause / resume membership actions) are modeled
+    from the documented operation names; verify exact path segments against the
+    live reference on reconciliation.
+  version: '1.0'
+  contact:
+    name: API Evangelist
+    email: kin@apievangelist.com
+    url: https://apievangelist.com
+  license:
+    name: API documentation - Whop Terms of Service
+    url: https://whop.com/terms-of-service/
+servers:
+  - url: https://api.whop.com/api/v1
+    description: Production
+  - url: https://sandbox-api.whop.com/api/v1
+    description: Sandbox
+security:
+  - bearerAuth: []
+tags:
+  - name: Memberships
+    description: A user's access to a product; lifecycle and access management.
+  - name: Products
+    description: Products (access passes) that companies sell.
+  - name: Plans
+    description: Pricing plans attached to products.
+  - name: Payments
+    description: Charges, refunds, retries, and voids.
+  - name: Users
+    description: Whop users and their access checks.
+  - name: Companies
+    description: Seller companies (whops) and sub-merchant onboarding.
+  - name: Checkout Configurations
+    description: Reusable checkout / payment flow configurations.
+  - name: Transfers
+    description: Programmatic payouts to users and connected accounts.
+  - name: Webhooks
+    description: Webhook endpoint registration for platform events.
+  - name: Promo Codes
+    description: Discount / promo codes applied at checkout.
+paths:
+  /memberships:
+    get:
+      operationId: listMemberships
+      tags: [Memberships]
+      summary: List memberships
+      description: >-
+        Returns a cursor-paginated list of memberships. `company_id` is required
+        when authenticating with an API key.
+      parameters:
+        - { name: after, in: query, schema: { type: string }, description: Cursor for forward pagination. }
+        - { name: before, in: query, schema: { type: string }, description: Cursor for backward pagination. }
+        - { name: first, in: query, schema: { type: integer }, description: Return the first n elements. }
+        - { name: last, in: query, schema: { type: integer }, description: Return the last n elements. }
+        - { name: company_id, in: query, schema: { type: string }, description: Filter by company; required for API keys. }
+        - { name: direction, in: query, schema: { type: string, enum: [asc, desc] }, description: Sort direction. }
+        - name: order
+          in: query
+          schema: { type: string, enum: [id, created_at, status, canceled_at, date_joined, total_spend] }
+          description: Sort field.
+        - { name: product_ids, in: query, schema: { type: array, items: { type: string } }, description: Filter by product identifiers. }
+        - { name: plan_ids, in: query, schema: { type: array, items: { type: string } }, description: Filter by plan identifiers. }
+        - { name: user_ids, in: query, schema: { type: array, items: { type: string } }, description: Filter by user identifiers. }
+        - { name: statuses, in: query, schema: { type: array, items: { type: string } }, description: Filter by membership status. }
+        - { name: cancel_options, in: query, schema: { type: array, items: { type: string } }, description: Filter by cancellation reason. }
+        - { name: promo_code_ids, in: query, schema: { type: array, items: { type: string } }, description: Filter by applied promo codes. }
+        - { name: created_before, in: query, schema: { type: string, format: date-time } }
+        - { name: created_after, in: query, schema: { type: string, format: date-time } }
+      responses:
+        '200':
+          description: A page of memberships.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items: { $ref: '#/components/schemas/Membership' }
+                  page_info: { $ref: '#/components/schemas/PageInfo' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /memberships/{id}:
+    parameters:
+      - { name: id, in: path, required: true, schema: { type: string }, description: The membership ID. }
+    get:
+      operationId: retrieveMembership
+      tags: [Memberships]
+      summary: Retrieve a membership
+      responses:
+        '200':
+          description: A membership.
+          content: { application/json: { schema: { $ref: '#/components/schemas/Membership' } } }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+    post:
+      operationId: updateMembership
+      tags: [Memberships]
+      summary: Update a membership
+      description: Update mutable fields on a membership (for example metadata).
+      requestBody:
+        content: { application/json: { schema: { type: object, additionalProperties: true } } }
+      responses:
+        '200':
+          description: The updated membership.
+          content: { application/json: { schema: { $ref: '#/components/schemas/Membership' } } }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /memberships/{id}/add_free_days:
+    post:
+      operationId: addFreeDaysMembership
+      tags: [Memberships]
+      summary: Add free days to a membership
+      description: >-
+        Extends the current renewal period by a number of free days. Path
+        segment modeled from the documented `add-free-days` operation.
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      requestBody:
+        content: { application/json: { schema: { type: object, properties: { days: { type: integer } }, required: [days] } } }
+      responses:
+        '200':
+          description: The updated membership.
+          content: { application/json: { schema: { $ref: '#/components/schemas/Membership' } } }
+  /memberships/{id}/cancel:
+    post:
+      operationId: cancelMembership
+      tags: [Memberships]
+      summary: Cancel a membership
+      description: Cancels a membership immediately or at period end. Path segment modeled from the documented `cancel` operation.
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: The canceled membership.
+          content: { application/json: { schema: { $ref: '#/components/schemas/Membership' } } }
+  /memberships/{id}/uncancel:
+    post:
+      operationId: uncancelMembership
+      tags: [Memberships]
+      summary: Uncancel a membership
+      description: Reverses a scheduled cancellation. Path segment modeled from the documented `uncancel` operation.
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: The membership.
+          content: { application/json: { schema: { $ref: '#/components/schemas/Membership' } } }
+  /memberships/{id}/pause:
+    post:
+      operationId: pauseMembership
+      tags: [Memberships]
+      summary: Pause a membership
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: The paused membership.
+          content: { application/json: { schema: { $ref: '#/components/schemas/Membership' } } }
+  /memberships/{id}/resume:
+    post:
+      operationId: resumeMembership
+      tags: [Memberships]
+      summary: Resume a membership
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: The resumed membership.
+          content: { application/json: { schema: { $ref: '#/components/schemas/Membership' } } }
+  /products:
+    get:
+      operationId: listProducts
+      tags: [Products]
+      summary: List products
+      parameters:
+        - { name: company_id, in: query, schema: { type: string }, description: Filter by company; required for API keys. }
+        - { name: after, in: query, schema: { type: string } }
+        - { name: before, in: query, schema: { type: string } }
+        - { name: first, in: query, schema: { type: integer } }
+      responses:
+        '200':
+          description: A page of products.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: { type: array, items: { $ref: '#/components/schemas/Product' } }
+                  page_info: { $ref: '#/components/schemas/PageInfo' }
+    post:
+      operationId: createProduct
+      tags: [Products]
+      summary: Create a product
+      requestBody:
+        content: { application/json: { schema: { $ref: '#/components/schemas/Product' } } }
+      responses:
+        '201':
+          description: The created product.
+          content: { application/json: { schema: { $ref: '#/components/schemas/Product' } } }
+  /products/{id}:
+    parameters:
+      - { name: id, in: path, required: true, schema: { type: string }, description: The product ID. }
+    get:
+      operationId: retrieveProduct
+      tags: [Products]
+      summary: Retrieve a product
+      responses:
+        '200':
+          description: A product.
+          content: { application/json: { schema: { $ref: '#/components/schemas/Product' } } }
+        '404': { $ref: '#/components/responses/NotFound' }
+    post:
+      operationId: updateProduct
+      tags: [Products]
+      summary: Update a product
+      requestBody:
+        content: { application/json: { schema: { $ref: '#/components/schemas/Product' } } }
+      responses:
+        '200':
+          description: The updated product.
+          content: { application/json: { schema: { $ref: '#/components/schemas/Product' } } }
+    delete:
+      operationId: deleteProduct
+      tags: [Products]
+      summary: Delete a product
+      responses:
+        '204': { description: The product was deleted. }
+  /plans:
+    get:
+      operationId: listPlans
+      tags: [Plans]
+      summary: List plans
+      parameters:
+        - { name: company_id, in: query, schema: { type: string } }
+        - { name: product_ids, in: query, schema: { type: array, items: { type: string } } }
+      responses:
+        '200':
+          description: A page of plans.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: { type: array, items: { $ref: '#/components/schemas/Plan' } }
+                  page_info: { $ref: '#/components/schemas/PageInfo' }
+    post:
+      operationId: createPlan
+      tags: [Plans]
+      summary: Create a plan
+      requestBody:
+        content: { application/json: { schema: { $ref: '#/components/schemas/Plan' } } }
+      responses:
+        '201':
+          description: The created plan.
+          content: { application/json: { schema: { $ref: '#/components/schemas/Plan' } } }
+  /plans/{id}:
+    parameters:
+      - { name: id, in: path, required: true, schema: { type: string } }
+    get:
+      operationId: retrievePlan
+      tags: [Plans]
+      summary: Retrieve a plan
+      responses:
+        '200':
+          description: A plan.
+          content: { application/json: { schema: { $ref: '#/components/schemas/Plan' } } }
+    post:
+      operationId: updatePlan
+      tags: [Plans]
+      summary: Update a plan
+      requestBody:
+        content: { application/json: { schema: { $ref: '#/components/schemas/Plan' } } }
+      responses:
+        '200':
+          description: The updated plan.
+          content: { application/json: { schema: { $ref: '#/components/schemas/Plan' } } }
+    delete:
+      operationId: deletePlan
+      tags: [Plans]
+      summary: Delete a plan
+      responses:
+        '204': { description: The plan was deleted. }
+  /plans/{id}/calculate_tax:
+    post:
+      operationId: calculateTax
+      tags: [Plans]
+      summary: Calculate tax for a plan
+      description: Estimates tax for a plan at a given billing address. Path segment modeled from the documented `calculate-tax` operation.
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      requestBody:
+        content: { application/json: { schema: { type: object, additionalProperties: true } } }
+      responses:
+        '200':
+          description: Tax calculation result.
+          content: { application/json: { schema: { type: object, additionalProperties: true } } }
+  /payments:
+    get:
+      operationId: listPayments
+      tags: [Payments]
+      summary: List payments
+      parameters:
+        - { name: after, in: query, schema: { type: string } }
+        - { name: before, in: query, schema: { type: string } }
+        - { name: first, in: query, schema: { type: integer } }
+        - { name: last, in: query, schema: { type: integer } }
+        - { name: company_id, in: query, schema: { type: string } }
+        - { name: direction, in: query, schema: { type: string, enum: [asc, desc] } }
+        - { name: order, in: query, schema: { type: string, enum: [final_amount, created_at, paid_at] } }
+        - { name: product_ids, in: query, schema: { type: array, items: { type: string } } }
+        - { name: plan_ids, in: query, schema: { type: array, items: { type: string } } }
+        - { name: statuses, in: query, schema: { type: array, items: { type: string } } }
+        - { name: substatuses, in: query, schema: { type: array, items: { type: string } } }
+        - { name: billing_reasons, in: query, schema: { type: array, items: { type: string } } }
+        - { name: currencies, in: query, schema: { type: array, items: { type: string } } }
+        - { name: created_before, in: query, schema: { type: string, format: date-time } }
+        - { name: created_after, in: query, schema: { type: string, format: date-time } }
+        - { name: query, in: query, schema: { type: string }, description: Search by user ID, email, name, or username. }
+        - { name: include_free, in: query, schema: { type: boolean }, description: Include zero-amount payments. }
+      responses:
+        '200':
+          description: A page of payments.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: { type: array, items: { $ref: '#/components/schemas/Payment' } }
+                  page_info: { $ref: '#/components/schemas/PageInfo' }
+    post:
+      operationId: createPayment
+      tags: [Payments]
+      summary: Create a payment
+      description: Charge a saved payment method off-session for a member.
+      requestBody:
+        content: { application/json: { schema: { type: object, additionalProperties: true } } }
+      responses:
+        '201':
+          description: The created payment.
+          content: { application/json: { schema: { $ref: '#/components/schemas/Payment' } } }
+  /payments/{id}:
+    parameters:
+      - { name: id, in: path, required: true, schema: { type: string } }
+    get:
+      operationId: retrievePayment
+      tags: [Payments]
+      summary: Retrieve a payment
+      responses:
+        '200':
+          description: A payment.
+          content: { application/json: { schema: { $ref: '#/components/schemas/Payment' } } }
+  /payments/{id}/refund:
+    post:
+      operationId: refundPayment
+      tags: [Payments]
+      summary: Refund a payment
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: The refunded payment.
+          content: { application/json: { schema: { $ref: '#/components/schemas/Payment' } } }
+  /payments/{id}/retry:
+    post:
+      operationId: retryPayment
+      tags: [Payments]
+      summary: Retry a failed payment
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: The payment.
+          content: { application/json: { schema: { $ref: '#/components/schemas/Payment' } } }
+  /payments/{id}/void:
+    post:
+      operationId: voidPayment
+      tags: [Payments]
+      summary: Void a payment
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: The voided payment.
+          content: { application/json: { schema: { $ref: '#/components/schemas/Payment' } } }
+  /users:
+    get:
+      operationId: listUsers
+      tags: [Users]
+      summary: List users
+      parameters:
+        - { name: company_id, in: query, schema: { type: string } }
+        - { name: after, in: query, schema: { type: string } }
+        - { name: first, in: query, schema: { type: integer } }
+      responses:
+        '200':
+          description: A page of users.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: { type: array, items: { $ref: '#/components/schemas/User' } }
+                  page_info: { $ref: '#/components/schemas/PageInfo' }
+  /users/{id}:
+    parameters:
+      - { name: id, in: path, required: true, schema: { type: string } }
+    get:
+      operationId: retrieveUser
+      tags: [Users]
+      summary: Retrieve a user
+      responses:
+        '200':
+          description: A user.
+          content: { application/json: { schema: { $ref: '#/components/schemas/User' } } }
+    post:
+      operationId: updateUser
+      tags: [Users]
+      summary: Update a user
+      requestBody:
+        content: { application/json: { schema: { $ref: '#/components/schemas/User' } } }
+      responses:
+        '200':
+          description: The updated user.
+          content: { application/json: { schema: { $ref: '#/components/schemas/User' } } }
+  /users/{id}/check_access:
+    get:
+      operationId: checkUserAccess
+      tags: [Users]
+      summary: Check user access
+      description: >-
+        Checks whether a user has access to a given access pass / experience.
+        Path segment modeled from the documented `check-user-access` operation.
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+        - { name: access_pass_id, in: query, schema: { type: string } }
+        - { name: experience_id, in: query, schema: { type: string } }
+      responses:
+        '200':
+          description: Access check result.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  has_access: { type: boolean }
+                  access_level: { type: string }
+  /companies:
+    get:
+      operationId: listCompanies
+      tags: [Companies]
+      summary: List companies
+      responses:
+        '200':
+          description: A page of companies.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: { type: array, items: { $ref: '#/components/schemas/Company' } }
+                  page_info: { $ref: '#/components/schemas/PageInfo' }
+    post:
+      operationId: createCompany
+      tags: [Companies]
+      summary: Create a company
+      description: Onboard a sub-merchant company under a platform account.
+      requestBody:
+        content: { application/json: { schema: { $ref: '#/components/schemas/Company' } } }
+      responses:
+        '201':
+          description: The created company.
+          content: { application/json: { schema: { $ref: '#/components/schemas/Company' } } }
+  /companies/{id}:
+    parameters:
+      - { name: id, in: path, required: true, schema: { type: string } }
+    get:
+      operationId: retrieveCompany
+      tags: [Companies]
+      summary: Retrieve a company
+      responses:
+        '200':
+          description: A company.
+          content: { application/json: { schema: { $ref: '#/components/schemas/Company' } } }
+    post:
+      operationId: updateCompany
+      tags: [Companies]
+      summary: Update a company
+      requestBody:
+        content: { application/json: { schema: { $ref: '#/components/schemas/Company' } } }
+      responses:
+        '200':
+          description: The updated company.
+          content: { application/json: { schema: { $ref: '#/components/schemas/Company' } } }
+  /companies/{id}/api_keys:
+    post:
+      operationId: createChildCompanyApiKey
+      tags: [Companies]
+      summary: Create a child company API key
+      description: Mints an API key for a sub-merchant company. Path segment modeled from the documented `create-child-company-api-key` operation.
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        '201':
+          description: The created API key.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id: { type: string }
+                  api_key: { type: string }
+  /checkout_configurations:
+    get:
+      operationId: listCheckoutConfigurations
+      tags: [Checkout Configurations]
+      summary: List checkout configurations
+      responses:
+        '200':
+          description: A page of checkout configurations.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: { type: array, items: { $ref: '#/components/schemas/CheckoutConfiguration' } }
+                  page_info: { $ref: '#/components/schemas/PageInfo' }
+    post:
+      operationId: createCheckoutConfiguration
+      tags: [Checkout Configurations]
+      summary: Create a checkout configuration
+      requestBody:
+        content: { application/json: { schema: { $ref: '#/components/schemas/CheckoutConfiguration' } } }
+      responses:
+        '201':
+          description: The created checkout configuration.
+          content: { application/json: { schema: { $ref: '#/components/schemas/CheckoutConfiguration' } } }
+  /checkout_configurations/{id}:
+    parameters:
+      - { name: id, in: path, required: true, schema: { type: string } }
+    get:
+      operationId: retrieveCheckoutConfiguration
+      tags: [Checkout Configurations]
+      summary: Retrieve a checkout configuration
+      responses:
+        '200':
+          description: A checkout configuration.
+          content: { application/json: { schema: { $ref: '#/components/schemas/CheckoutConfiguration' } } }
+    delete:
+      operationId: deleteCheckoutConfiguration
+      tags: [Checkout Configurations]
+      summary: Delete a checkout configuration
+      responses:
+        '204': { description: The checkout configuration was deleted. }
+  /transfers:
+    get:
+      operationId: listTransfers
+      tags: [Transfers]
+      summary: List transfers
+      responses:
+        '200':
+          description: A page of transfers.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: { type: array, items: { $ref: '#/components/schemas/Transfer' } }
+                  page_info: { $ref: '#/components/schemas/PageInfo' }
+    post:
+      operationId: createTransfer
+      tags: [Transfers]
+      summary: Create a transfer
+      description: Programmatically pay out a user or connected ledger account.
+      requestBody:
+        content: { application/json: { schema: { $ref: '#/components/schemas/Transfer' } } }
+      responses:
+        '201':
+          description: The created transfer.
+          content: { application/json: { schema: { $ref: '#/components/schemas/Transfer' } } }
+  /transfers/{id}:
+    get:
+      operationId: retrieveTransfer
+      tags: [Transfers]
+      summary: Retrieve a transfer
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: A transfer.
+          content: { application/json: { schema: { $ref: '#/components/schemas/Transfer' } } }
+  /webhooks:
+    get:
+      operationId: listWebhooks
+      tags: [Webhooks]
+      summary: List webhooks
+      responses:
+        '200':
+          description: A page of webhooks.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: { type: array, items: { $ref: '#/components/schemas/Webhook' } }
+                  page_info: { $ref: '#/components/schemas/PageInfo' }
+    post:
+      operationId: createWebhook
+      tags: [Webhooks]
+      summary: Create a webhook
+      requestBody:
+        content: { application/json: { schema: { $ref: '#/components/schemas/Webhook' } } }
+      responses:
+        '201':
+          description: The created webhook.
+          content: { application/json: { schema: { $ref: '#/components/schemas/Webhook' } } }
+  /webhooks/{id}:
+    parameters:
+      - { name: id, in: path, required: true, schema: { type: string } }
+    get:
+      operationId: retrieveWebhook
+      tags: [Webhooks]
+      summary: Retrieve a webhook
+      responses:
+        '200':
+          description: A webhook.
+          content: { application/json: { schema: { $ref: '#/components/schemas/Webhook' } } }
+    post:
+      operationId: updateWebhook
+      tags: [Webhooks]
+      summary: Update a webhook
+      requestBody:
+        content: { application/json: { schema: { $ref: '#/components/schemas/Webhook' } } }
+      responses:
+        '200':
+          description: The updated webhook.
+          content: { application/json: { schema: { $ref: '#/components/schemas/Webhook' } } }
+    delete:
+      operationId: deleteWebhook
+      tags: [Webhooks]
+      summary: Delete a webhook
+      responses:
+        '204': { description: The webhook was deleted. }
+  /promo_codes:
+    get:
+      operationId: listPromoCodes
+      tags: [Promo Codes]
+      summary: List promo codes
+      responses:
+        '200':
+          description: A page of promo codes.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: { type: array, items: { $ref: '#/components/schemas/PromoCode' } }
+                  page_info: { $ref: '#/components/schemas/PageInfo' }
+    post:
+      operationId: createPromoCode
+      tags: [Promo Codes]
+      summary: Create a promo code
+      requestBody:
+        content: { application/json: { schema: { $ref: '#/components/schemas/PromoCode' } } }
+      responses:
+        '201':
+          description: The created promo code.
+          content: { application/json: { schema: { $ref: '#/components/schemas/PromoCode' } } }
+  /promo_codes/{id}:
+    parameters:
+      - { name: id, in: path, required: true, schema: { type: string } }
+    get:
+      operationId: retrievePromoCode
+      tags: [Promo Codes]
+      summary: Retrieve a promo code
+      responses:
+        '200':
+          description: A promo code.
+          content: { application/json: { schema: { $ref: '#/components/schemas/PromoCode' } } }
+    post:
+      operationId: updatePromoCode
+      tags: [Promo Codes]
+      summary: Update a promo code
+      requestBody:
+        content: { application/json: { schema: { $ref: '#/components/schemas/PromoCode' } } }
+      responses:
+        '200':
+          description: The updated promo code.
+          content: { application/json: { schema: { $ref: '#/components/schemas/PromoCode' } } }
+    delete:
+      operationId: deletePromoCode
+      tags: [Promo Codes]
+      summary: Delete a promo code
+      responses:
+        '204': { description: The promo code was deleted. }
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: Whop API key
+      description: >-
+        Bearer token authentication. Use a Company/Account API key or an App API
+        key in the `Authorization: Bearer <API_KEY>` header. OAuth access tokens
+        are used when acting on behalf of a signed-in Whop user.
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+  schemas:
+    PageInfo:
+      type: object
+      description: Cursor pagination metadata.
+      properties:
+        has_next_page: { type: boolean }
+        has_previous_page: { type: boolean }
+        start_cursor: { type: string, nullable: true }
+        end_cursor: { type: string, nullable: true }
+    Error:
+      type: object
+      properties:
+        error: { type: string }
+        message: { type: string }
+    Membership:
+      type: object
+      description: A user's access to a product. Fields taken from the documented List memberships response.
+      properties:
+        id: { type: string }
+        status:
+          type: string
+          description: Lifecycle state (for example active, trialing, past_due, canceled).
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+        joined_at: { type: string, format: date-time, nullable: true }
+        canceled_at: { type: string, format: date-time, nullable: true }
+        renewal_period_start: { type: string, format: date-time, nullable: true }
+        renewal_period_end: { type: string, format: date-time, nullable: true }
+        cancel_at_period_end: { type: boolean }
+        currency: { type: string }
+        license_key: { type: string, nullable: true }
+        manage_url: { type: string, nullable: true }
+        checkout_configuration_id: { type: string, nullable: true }
+        metadata: { type: object, additionalProperties: true }
+        user: { type: object, additionalProperties: true }
+        member: { type: object, additionalProperties: true }
+        company: { type: object, additionalProperties: true }
+        product: { type: object, additionalProperties: true }
+        plan: { type: object, additionalProperties: true }
+    Product:
+      type: object
+      description: A product (access pass) sold by a company. Fields modeled from the documented Product object.
+      properties:
+        id: { type: string }
+        title: { type: string }
+        description: { type: string, nullable: true }
+        route: { type: string, nullable: true }
+        visibility: { type: string }
+        member_count: { type: integer }
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+        company: { type: object, additionalProperties: true }
+        metadata: { type: object, additionalProperties: true }
+    Plan:
+      type: object
+      description: A pricing plan attached to a product.
+      properties:
+        id: { type: string }
+        product_id: { type: string }
+        plan_type: { type: string, description: 'For example one_time or renewal.' }
+        base_currency: { type: string }
+        initial_price: { type: number }
+        renewal_price: { type: number, nullable: true }
+        billing_period: { type: integer, nullable: true, description: Billing period length in days. }
+        trial_period_days: { type: integer, nullable: true }
+        visibility: { type: string }
+        created_at: { type: string, format: date-time }
+    Payment:
+      type: object
+      description: A payment. Fields taken from the documented List payments (PaymentListItem) response.
+      properties:
+        id: { type: string }
+        status: { type: string }
+        substatus: { type: string, nullable: true }
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+        paid_at: { type: string, format: date-time, nullable: true }
+        total: { type: number }
+        subtotal: { type: number }
+        currency: { type: string }
+        refunded_amount: { type: number, nullable: true }
+        card_last4: { type: string, nullable: true }
+        billing_reason: { type: string, nullable: true }
+        failure_message: { type: string, nullable: true }
+        user: { type: object, additionalProperties: true }
+        plan: { type: object, additionalProperties: true }
+        product: { type: object, additionalProperties: true }
+        membership: { type: object, additionalProperties: true }
+        payment_method: { type: object, additionalProperties: true }
+        company: { type: object, additionalProperties: true }
+        promo_code: { type: object, additionalProperties: true, nullable: true }
+    User:
+      type: object
+      description: A Whop user.
+      properties:
+        id: { type: string }
+        username: { type: string, nullable: true }
+        name: { type: string, nullable: true }
+        email: { type: string, nullable: true }
+        profile_pic_url: { type: string, nullable: true }
+        created_at: { type: string, format: date-time }
+    Company:
+      type: object
+      description: A seller company (whop) or sub-merchant.
+      properties:
+        id: { type: string }
+        title: { type: string }
+        route: { type: string, nullable: true }
+        image_url: { type: string, nullable: true }
+        created_at: { type: string, format: date-time }
+    CheckoutConfiguration:
+      type: object
+      description: A reusable checkout / payment flow configuration.
+      properties:
+        id: { type: string }
+        plan_id: { type: string, nullable: true }
+        redirect_url: { type: string, nullable: true }
+        metadata: { type: object, additionalProperties: true }
+        created_at: { type: string, format: date-time }
+    Transfer:
+      type: object
+      description: A programmatic payout to a user or ledger account.
+      properties:
+        id: { type: string }
+        amount: { type: number }
+        currency: { type: string }
+        status: { type: string }
+        destination_id: { type: string, nullable: true }
+        created_at: { type: string, format: date-time }
+    Webhook:
+      type: object
+      description: A registered webhook endpoint.
+      properties:
+        id: { type: string }
+        url: { type: string }
+        events: { type: array, items: { type: string } }
+        enabled: { type: boolean }
+        created_at: { type: string, format: date-time }
+    PromoCode:
+      type: object
+      description: A discount / promo code applied at checkout.
+      properties:
+        id: { type: string }
+        code: { type: string }
+        amount_off: { type: number, nullable: true }
+        percent_off: { type: number, nullable: true }
+        status: { type: string }
+        created_at: { type: string, format: date-time }
