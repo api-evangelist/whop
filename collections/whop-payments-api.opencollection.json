@@ -1,0 +1,205 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Whop REST API (v1) Checkout Configurations Payments API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.whop.com/api/v1/payments",
+            "params": [
+              {
+                "name": "after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "first",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "last",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "product_ids",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "plan_ids",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "statuses",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "substatuses",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "billing_reasons",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "currencies",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include_free",
+                "value": "",
+                "type": "query",
+                "description": "Include zero-amount payments."
+              }
+            ]
+          },
+          "docs": "List payments"
+        },
+        {
+          "info": {
+            "name": "Create a payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.whop.com/api/v1/payments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Charge a saved payment method off-session for a member."
+        },
+        {
+          "info": {
+            "name": "Retrieve a payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.whop.com/api/v1/payments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a payment"
+        },
+        {
+          "info": {
+            "name": "Refund a payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.whop.com/api/v1/payments/:id/refund",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Refund a payment"
+        },
+        {
+          "info": {
+            "name": "Retry a failed payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.whop.com/api/v1/payments/:id/retry",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retry a failed payment"
+        },
+        {
+          "info": {
+            "name": "Void a payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.whop.com/api/v1/payments/:id/void",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Void a payment"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

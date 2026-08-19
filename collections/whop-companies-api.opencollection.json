@@ -1,0 +1,108 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Whop REST API (v1) Checkout Configurations Companies API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Companies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List companies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.whop.com/api/v1/companies"
+          },
+          "docs": "List companies"
+        },
+        {
+          "info": {
+            "name": "Create a company",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.whop.com/api/v1/companies",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Onboard a sub-merchant company under a platform account."
+        },
+        {
+          "info": {
+            "name": "Retrieve a company",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.whop.com/api/v1/companies/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a company"
+        },
+        {
+          "info": {
+            "name": "Update a company",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.whop.com/api/v1/companies/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a company"
+        },
+        {
+          "info": {
+            "name": "Create a child company API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.whop.com/api/v1/companies/:id/api_keys",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Mints an API key for a sub-merchant company. Path segment modeled from the documented `create-child-company-api-key` operation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

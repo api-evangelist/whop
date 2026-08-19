@@ -1,0 +1,650 @@
+{
+  "item": [
+    {
+      "id": "0bf69e7d-e987-4530-93a4-d7fdc7e415f3",
+      "name": "Plans",
+      "description": {
+        "content": "Pricing plans attached to products.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3790be86-24f2-408d-9036-e29d17cd11fa",
+          "name": "List plans",
+          "request": {
+            "name": "List plans",
+            "description": {},
+            "url": {
+              "path": [
+                "plans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "company_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_ids",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_ids",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "409ed314-aacf-44dc-86f2-4e50a554bf99",
+              "name": "A page of plans.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "company_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_ids",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"product_id\": \"string\",\n      \"plan_type\": \"string\",\n      \"base_currency\": \"string\",\n      \"initial_price\": 6023.093393845551,\n      \"renewal_price\": 9295.463646329808,\n      \"billing_period\": 6190,\n      \"trial_period_days\": 1824,\n      \"visibility\": \"string\",\n      \"created_at\": \"1959-09-03T17:11:20.458Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"product_id\": \"string\",\n      \"plan_type\": \"string\",\n      \"base_currency\": \"string\",\n      \"initial_price\": 4957.556085462971,\n      \"renewal_price\": 5012.574971568721,\n      \"billing_period\": 1881,\n      \"trial_period_days\": 2991,\n      \"visibility\": \"string\",\n      \"created_at\": \"1962-06-07T04:20:56.854Z\"\n    }\n  ],\n  \"page_info\": {\n    \"has_next_page\": true,\n    \"has_previous_page\": false,\n    \"start_cursor\": \"string\",\n    \"end_cursor\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ed57e35-c863-4253-9370-f9acd51c0be6",
+          "name": "Create a plan",
+          "request": {
+            "name": "Create a plan",
+            "description": {},
+            "url": {
+              "path": [
+                "plans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"product_id\": \"<string>\",\n  \"plan_type\": \"<string>\",\n  \"base_currency\": \"<string>\",\n  \"initial_price\": \"<number>\",\n  \"renewal_price\": \"<number>\",\n  \"billing_period\": \"<integer>\",\n  \"trial_period_days\": \"<integer>\",\n  \"visibility\": \"<string>\",\n  \"created_at\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dda2e73e-a942-4d61-9d89-078b2018710e",
+              "name": "The created plan.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"product_id\": \"<string>\",\n  \"plan_type\": \"<string>\",\n  \"base_currency\": \"<string>\",\n  \"initial_price\": \"<number>\",\n  \"renewal_price\": \"<number>\",\n  \"billing_period\": \"<integer>\",\n  \"trial_period_days\": \"<integer>\",\n  \"visibility\": \"<string>\",\n  \"created_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"product_id\": \"<string>\",\n  \"plan_type\": \"<string>\",\n  \"base_currency\": \"<string>\",\n  \"initial_price\": \"<number>\",\n  \"renewal_price\": \"<number>\",\n  \"billing_period\": \"<integer>\",\n  \"trial_period_days\": \"<integer>\",\n  \"visibility\": \"<string>\",\n  \"created_at\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fef358b1-6172-4412-adda-4e4e9ef9025c",
+          "name": "Retrieve a plan",
+          "request": {
+            "name": "Retrieve a plan",
+            "description": {},
+            "url": {
+              "path": [
+                "plans",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0a89406d-9bc4-4d86-8b10-2107c9819f16",
+              "name": "A plan.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plans",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"product_id\": \"<string>\",\n  \"plan_type\": \"<string>\",\n  \"base_currency\": \"<string>\",\n  \"initial_price\": \"<number>\",\n  \"renewal_price\": \"<number>\",\n  \"billing_period\": \"<integer>\",\n  \"trial_period_days\": \"<integer>\",\n  \"visibility\": \"<string>\",\n  \"created_at\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3543e2dd-bea5-42fe-8ede-34ff7856d7c5",
+          "name": "Update a plan",
+          "request": {
+            "name": "Update a plan",
+            "description": {},
+            "url": {
+              "path": [
+                "plans",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"product_id\": \"<string>\",\n  \"plan_type\": \"<string>\",\n  \"base_currency\": \"<string>\",\n  \"initial_price\": \"<number>\",\n  \"renewal_price\": \"<number>\",\n  \"billing_period\": \"<integer>\",\n  \"trial_period_days\": \"<integer>\",\n  \"visibility\": \"<string>\",\n  \"created_at\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b1af8c96-e1db-4b1c-afcc-8482f068ecb5",
+              "name": "The updated plan.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plans",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"product_id\": \"<string>\",\n  \"plan_type\": \"<string>\",\n  \"base_currency\": \"<string>\",\n  \"initial_price\": \"<number>\",\n  \"renewal_price\": \"<number>\",\n  \"billing_period\": \"<integer>\",\n  \"trial_period_days\": \"<integer>\",\n  \"visibility\": \"<string>\",\n  \"created_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"product_id\": \"<string>\",\n  \"plan_type\": \"<string>\",\n  \"base_currency\": \"<string>\",\n  \"initial_price\": \"<number>\",\n  \"renewal_price\": \"<number>\",\n  \"billing_period\": \"<integer>\",\n  \"trial_period_days\": \"<integer>\",\n  \"visibility\": \"<string>\",\n  \"created_at\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "36bb0d0b-6a63-4476-88e1-c216b2b24a87",
+          "name": "Delete a plan",
+          "request": {
+            "name": "Delete a plan",
+            "description": {},
+            "url": {
+              "path": [
+                "plans",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1dd127ba-9010-4991-8b65-50f713958e50",
+              "name": "The plan was deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plans",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1ea9153e-790a-42d8-a0cc-63655d8a0b1b",
+          "name": "Calculate tax for a plan",
+          "request": {
+            "name": "Calculate tax for a plan",
+            "description": {
+              "content": "Estimates tax for a plan at a given billing address. Path segment modeled from the documented `calculate-tax` operation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "plans",
+                ":id",
+                "calculate_tax"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": \"string\",\n  \"key_1\": false,\n  \"key_2\": \"string\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0f77097e-2b64-43fc-8f4d-1f36bdb5af67",
+              "name": "Tax calculation result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plans",
+                    ":id",
+                    "calculate_tax"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": 7481.1595810383815,\n  \"key_1\": 1258\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": 7481.1595810383815,\n  \"key_1\": 1258\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.whop.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "acb982e0-47f2-48e2-bebe-7a34d277d570",
+    "name": "Whop REST API (v1) Checkout Configurations Plans API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Whop REST API (v1) is the current primary REST surface for the Whop digital-products / memberships / creator-commerce platform. It lets applications manage memberships and access, products (access passes) and their pricing plans, take payments and issue refunds, manage users and companies, build checkout flows, pay out users via transfers, and register webhooks. All requests are authenticated with a Bearer token (`Authorization: Bearer <API_KEY>`); a Company/Account API key and an App API key are the two key types, with OAuth tokens used when acting on behalf of a signed-in Whop user.\nGrounding notes: base URLs, the Bearer scheme, the `List memberships` and `List payments` query parameters and response fields, and the resource / operation catalog are taken from Whop's published documentation at docs.whop.com (see the docs `llms.txt` index). Individual action sub-paths (for example the cancel / pause / resume membership actions) are modeled from the documented operation names; verify exact path segments against the live reference on reconciliation.\n\nContact Support:\n Name: API Evangelist\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

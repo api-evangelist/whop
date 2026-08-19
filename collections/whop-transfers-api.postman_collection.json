@@ -1,0 +1,308 @@
+{
+  "item": [
+    {
+      "id": "4ec919a6-a935-457d-a22d-157d8c54ae9b",
+      "name": "Transfers",
+      "description": {
+        "content": "Programmatic payouts to users and connected accounts.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7c05a7bf-c335-4e93-b5f6-a209d4ca9fef",
+          "name": "List transfers",
+          "request": {
+            "name": "List transfers",
+            "description": {},
+            "url": {
+              "path": [
+                "transfers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6bd23daa-4469-4376-a3dd-0b082ee9bcae",
+              "name": "A page of transfers.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"amount\": 193.87461732690903,\n      \"currency\": \"string\",\n      \"status\": \"string\",\n      \"destination_id\": \"string\",\n      \"created_at\": \"1988-11-24T14:50:47.551Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"amount\": 7386.548394159416,\n      \"currency\": \"string\",\n      \"status\": \"string\",\n      \"destination_id\": \"string\",\n      \"created_at\": \"1979-07-19T08:28:10.188Z\"\n    }\n  ],\n  \"page_info\": {\n    \"has_next_page\": false,\n    \"has_previous_page\": false,\n    \"start_cursor\": \"string\",\n    \"end_cursor\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "34c004d4-7cc1-450e-8151-c9aeb1696070",
+          "name": "Create a transfer",
+          "request": {
+            "name": "Create a transfer",
+            "description": {
+              "content": "Programmatically pay out a user or connected ledger account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transfers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"status\": \"<string>\",\n  \"destination_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "777dc785-1e29-49f1-90e4-2fc6291159da",
+              "name": "The created transfer.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"status\": \"<string>\",\n  \"destination_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"status\": \"<string>\",\n  \"destination_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9d955ebb-f94f-4eb7-b884-bf9a5134949d",
+          "name": "Retrieve a transfer",
+          "request": {
+            "name": "Retrieve a transfer",
+            "description": {},
+            "url": {
+              "path": [
+                "transfers",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0038ba2a-26a2-48f9-8cb0-4e15e2a4fa30",
+              "name": "A transfer.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transfers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"status\": \"<string>\",\n  \"destination_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.whop.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c0d35bfd-25e7-400f-b275-263f7517ce53",
+    "name": "Whop REST API (v1) Checkout Configurations Transfers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Whop REST API (v1) is the current primary REST surface for the Whop digital-products / memberships / creator-commerce platform. It lets applications manage memberships and access, products (access passes) and their pricing plans, take payments and issue refunds, manage users and companies, build checkout flows, pay out users via transfers, and register webhooks. All requests are authenticated with a Bearer token (`Authorization: Bearer <API_KEY>`); a Company/Account API key and an App API key are the two key types, with OAuth tokens used when acting on behalf of a signed-in Whop user.\nGrounding notes: base URLs, the Bearer scheme, the `List memberships` and `List payments` query parameters and response fields, and the resource / operation catalog are taken from Whop's published documentation at docs.whop.com (see the docs `llms.txt` index). Individual action sub-paths (for example the cancel / pause / resume membership actions) are modeled from the documented operation names; verify exact path segments against the live reference on reconciliation.\n\nContact Support:\n Name: API Evangelist\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

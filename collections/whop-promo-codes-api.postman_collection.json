@@ -1,0 +1,502 @@
+{
+  "item": [
+    {
+      "id": "347795d6-dc6a-46d1-a526-17dad2df9f73",
+      "name": "Promo Codes",
+      "description": {
+        "content": "Discount / promo codes applied at checkout.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3b98d354-e75a-4e48-89c7-80fa21200b89",
+          "name": "List promo codes",
+          "request": {
+            "name": "List promo codes",
+            "description": {},
+            "url": {
+              "path": [
+                "promo_codes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c5ccaf95-4316-4aea-839a-c4ea138d70e0",
+              "name": "A page of promo codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "promo_codes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"code\": \"string\",\n      \"amount_off\": 5690.896740457318,\n      \"percent_off\": 1134.5866914408298,\n      \"status\": \"string\",\n      \"created_at\": \"1959-04-14T00:36:48.403Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"code\": \"string\",\n      \"amount_off\": 9952.25762204331,\n      \"percent_off\": 9795.075058129523,\n      \"status\": \"string\",\n      \"created_at\": \"2017-01-30T23:21:21.539Z\"\n    }\n  ],\n  \"page_info\": {\n    \"has_next_page\": false,\n    \"has_previous_page\": true,\n    \"start_cursor\": \"string\",\n    \"end_cursor\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "26134b48-8482-431c-b9ad-bd4de5085279",
+          "name": "Create a promo code",
+          "request": {
+            "name": "Create a promo code",
+            "description": {},
+            "url": {
+              "path": [
+                "promo_codes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"code\": \"<string>\",\n  \"amount_off\": \"<number>\",\n  \"percent_off\": \"<number>\",\n  \"status\": \"<string>\",\n  \"created_at\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0284cf48-8a15-4a8a-9007-e1a4275f3c22",
+              "name": "The created promo code.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "promo_codes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"code\": \"<string>\",\n  \"amount_off\": \"<number>\",\n  \"percent_off\": \"<number>\",\n  \"status\": \"<string>\",\n  \"created_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"code\": \"<string>\",\n  \"amount_off\": \"<number>\",\n  \"percent_off\": \"<number>\",\n  \"status\": \"<string>\",\n  \"created_at\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "64cd994c-851a-4464-9d44-9b34511ded0f",
+          "name": "Retrieve a promo code",
+          "request": {
+            "name": "Retrieve a promo code",
+            "description": {},
+            "url": {
+              "path": [
+                "promo_codes",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0e4dc326-0d35-4463-8d8e-bfa5f1ab879f",
+              "name": "A promo code.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "promo_codes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"code\": \"<string>\",\n  \"amount_off\": \"<number>\",\n  \"percent_off\": \"<number>\",\n  \"status\": \"<string>\",\n  \"created_at\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2c7e418b-aad1-4012-b63a-b038d42efc7c",
+          "name": "Update a promo code",
+          "request": {
+            "name": "Update a promo code",
+            "description": {},
+            "url": {
+              "path": [
+                "promo_codes",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"code\": \"<string>\",\n  \"amount_off\": \"<number>\",\n  \"percent_off\": \"<number>\",\n  \"status\": \"<string>\",\n  \"created_at\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7f5b47f6-4306-4da4-a690-da909587c69e",
+              "name": "The updated promo code.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "promo_codes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"code\": \"<string>\",\n  \"amount_off\": \"<number>\",\n  \"percent_off\": \"<number>\",\n  \"status\": \"<string>\",\n  \"created_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"code\": \"<string>\",\n  \"amount_off\": \"<number>\",\n  \"percent_off\": \"<number>\",\n  \"status\": \"<string>\",\n  \"created_at\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8afaf4db-58a0-4d2e-8c27-54279b5120a5",
+          "name": "Delete a promo code",
+          "request": {
+            "name": "Delete a promo code",
+            "description": {},
+            "url": {
+              "path": [
+                "promo_codes",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fa963e67-4fb2-4ac9-9c8c-2b37cc9b8618",
+              "name": "The promo code was deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "promo_codes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.whop.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "009d9e21-5df0-4017-978e-5a557a529f42",
+    "name": "Whop REST API (v1) Checkout Configurations Promo Codes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Whop REST API (v1) is the current primary REST surface for the Whop digital-products / memberships / creator-commerce platform. It lets applications manage memberships and access, products (access passes) and their pricing plans, take payments and issue refunds, manage users and companies, build checkout flows, pay out users via transfers, and register webhooks. All requests are authenticated with a Bearer token (`Authorization: Bearer <API_KEY>`); a Company/Account API key and an App API key are the two key types, with OAuth tokens used when acting on behalf of a signed-in Whop user.\nGrounding notes: base URLs, the Bearer scheme, the `List memberships` and `List payments` query parameters and response fields, and the resource / operation catalog are taken from Whop's published documentation at docs.whop.com (see the docs `llms.txt` index). Individual action sub-paths (for example the cancel / pause / resume membership actions) are modeled from the documented operation names; verify exact path segments against the live reference on reconciliation.\n\nContact Support:\n Name: API Evangelist\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

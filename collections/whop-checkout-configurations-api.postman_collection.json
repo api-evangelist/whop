@@ -1,0 +1,388 @@
+{
+  "item": [
+    {
+      "id": "a555ee85-7b2f-4359-b81d-7a9ee92be976",
+      "name": "Checkout Configurations",
+      "description": {
+        "content": "Reusable checkout / payment flow configurations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9fc77fe2-f663-4846-86e5-86c621caf0d2",
+          "name": "List checkout configurations",
+          "request": {
+            "name": "List checkout configurations",
+            "description": {},
+            "url": {
+              "path": [
+                "checkout_configurations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b35f606f-fdad-4d47-b5f0-ca7e89e2362d",
+              "name": "A page of checkout configurations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout_configurations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"plan_id\": \"string\",\n      \"redirect_url\": \"string\",\n      \"metadata\": {\n        \"key_0\": 822.924296276738,\n        \"key_1\": true,\n        \"key_2\": \"string\"\n      },\n      \"created_at\": \"1973-05-12T16:05:41.790Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"plan_id\": \"string\",\n      \"redirect_url\": \"string\",\n      \"metadata\": {\n        \"key_0\": 5590\n      },\n      \"created_at\": \"2023-07-30T18:10:20.641Z\"\n    }\n  ],\n  \"page_info\": {\n    \"has_next_page\": true,\n    \"has_previous_page\": false,\n    \"start_cursor\": \"string\",\n    \"end_cursor\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6180a5f0-2025-4f16-9517-e686157848af",
+          "name": "Create a checkout configuration",
+          "request": {
+            "name": "Create a checkout configuration",
+            "description": {},
+            "url": {
+              "path": [
+                "checkout_configurations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"plan_id\": \"<string>\",\n  \"redirect_url\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": 8221\n  },\n  \"created_at\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e3503f7e-2213-4d9f-bb2b-5c019dbf56c1",
+              "name": "The created checkout configuration.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout_configurations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"plan_id\": \"<string>\",\n  \"redirect_url\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": 2909\n  },\n  \"created_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"plan_id\": \"<string>\",\n  \"redirect_url\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": 2909\n  },\n  \"created_at\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0ba8b784-deed-432c-8808-4fca9ad3f426",
+          "name": "Retrieve a checkout configuration",
+          "request": {
+            "name": "Retrieve a checkout configuration",
+            "description": {},
+            "url": {
+              "path": [
+                "checkout_configurations",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e451e557-dc29-409f-bd1f-9990cb247bc9",
+              "name": "A checkout configuration.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout_configurations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"plan_id\": \"<string>\",\n  \"redirect_url\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": 2909\n  },\n  \"created_at\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b426730-309b-467a-8dfb-16bd0f96717b",
+          "name": "Delete a checkout configuration",
+          "request": {
+            "name": "Delete a checkout configuration",
+            "description": {},
+            "url": {
+              "path": [
+                "checkout_configurations",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5d30ab4d-655a-4de5-be20-ca0d7ce4cfbb",
+              "name": "The checkout configuration was deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout_configurations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.whop.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "191ea706-78a4-48fb-9098-940ea2ac67d7",
+    "name": "Whop REST API (v1) Checkout Configurations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Whop REST API (v1) is the current primary REST surface for the Whop digital-products / memberships / creator-commerce platform. It lets applications manage memberships and access, products (access passes) and their pricing plans, take payments and issue refunds, manage users and companies, build checkout flows, pay out users via transfers, and register webhooks. All requests are authenticated with a Bearer token (`Authorization: Bearer <API_KEY>`); a Company/Account API key and an App API key are the two key types, with OAuth tokens used when acting on behalf of a signed-in Whop user.\nGrounding notes: base URLs, the Bearer scheme, the `List memberships` and `List payments` query parameters and response fields, and the resource / operation catalog are taken from Whop's published documentation at docs.whop.com (see the docs `llms.txt` index). Individual action sub-paths (for example the cancel / pause / resume membership actions) are modeled from the documented operation names; verify exact path segments against the live reference on reconciliation.\n\nContact Support:\n Name: API Evangelist\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

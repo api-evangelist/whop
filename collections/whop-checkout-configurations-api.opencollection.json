@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Whop REST API (v1) Checkout Configurations API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Checkout Configurations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List checkout configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.whop.com/api/v1/checkout_configurations"
+          },
+          "docs": "List checkout configurations"
+        },
+        {
+          "info": {
+            "name": "Create a checkout configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.whop.com/api/v1/checkout_configurations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a checkout configuration"
+        },
+        {
+          "info": {
+            "name": "Retrieve a checkout configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.whop.com/api/v1/checkout_configurations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a checkout configuration"
+        },
+        {
+          "info": {
+            "name": "Delete a checkout configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.whop.com/api/v1/checkout_configurations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a checkout configuration"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

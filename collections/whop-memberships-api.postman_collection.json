@@ -1,0 +1,1336 @@
+{
+  "item": [
+    {
+      "id": "e74ba45f-5675-4222-898c-391a0e6d3f1f",
+      "name": "Memberships",
+      "description": {
+        "content": "A user's access to a product; lifecycle and access management.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "df03cc63-c743-4714-8b84-2df066d84477",
+          "name": "List memberships",
+          "request": {
+            "name": "List memberships",
+            "description": {
+              "content": "Returns a cursor-paginated list of memberships. `company_id` is required when authenticating with an API key.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "memberships"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>",
+                  "description": "Cursor for forward pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<string>",
+                  "description": "Cursor for backward pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "first",
+                  "value": "<integer>",
+                  "description": "Return the first n elements."
+                },
+                {
+                  "disabled": false,
+                  "key": "last",
+                  "value": "<integer>",
+                  "description": "Return the last n elements."
+                },
+                {
+                  "disabled": false,
+                  "key": "company_id",
+                  "value": "<string>",
+                  "description": "Filter by company; required for API keys."
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "<string>",
+                  "description": "Sort direction."
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Sort field."
+                },
+                {
+                  "disabled": false,
+                  "key": "product_ids",
+                  "value": "<string>",
+                  "description": "Filter by product identifiers."
+                },
+                {
+                  "disabled": false,
+                  "key": "product_ids",
+                  "value": "<string>",
+                  "description": "Filter by product identifiers."
+                },
+                {
+                  "disabled": false,
+                  "key": "plan_ids",
+                  "value": "<string>",
+                  "description": "Filter by plan identifiers."
+                },
+                {
+                  "disabled": false,
+                  "key": "plan_ids",
+                  "value": "<string>",
+                  "description": "Filter by plan identifiers."
+                },
+                {
+                  "disabled": false,
+                  "key": "user_ids",
+                  "value": "<string>",
+                  "description": "Filter by user identifiers."
+                },
+                {
+                  "disabled": false,
+                  "key": "user_ids",
+                  "value": "<string>",
+                  "description": "Filter by user identifiers."
+                },
+                {
+                  "disabled": false,
+                  "key": "statuses",
+                  "value": "<string>",
+                  "description": "Filter by membership status."
+                },
+                {
+                  "disabled": false,
+                  "key": "statuses",
+                  "value": "<string>",
+                  "description": "Filter by membership status."
+                },
+                {
+                  "disabled": false,
+                  "key": "cancel_options",
+                  "value": "<string>",
+                  "description": "Filter by cancellation reason."
+                },
+                {
+                  "disabled": false,
+                  "key": "cancel_options",
+                  "value": "<string>",
+                  "description": "Filter by cancellation reason."
+                },
+                {
+                  "disabled": false,
+                  "key": "promo_code_ids",
+                  "value": "<string>",
+                  "description": "Filter by applied promo codes."
+                },
+                {
+                  "disabled": false,
+                  "key": "promo_code_ids",
+                  "value": "<string>",
+                  "description": "Filter by applied promo codes."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_after",
+                  "value": "<dateTime>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f13e8736-e5a2-46c2-87cb-a30532ce9845",
+              "name": "A page of memberships.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "memberships"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "first",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "last",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "company_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "plan_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "plan_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "statuses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "statuses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cancel_options",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cancel_options",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "promo_code_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "promo_code_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_after",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"status\": \"string\",\n      \"created_at\": \"1994-04-08T03:34:50.753Z\",\n      \"updated_at\": \"1992-08-28T03:26:57.294Z\",\n      \"joined_at\": \"1984-05-28T16:47:04.464Z\",\n      \"canceled_at\": \"2004-04-07T20:33:02.954Z\",\n      \"renewal_period_start\": \"1950-12-15T02:11:20.143Z\",\n      \"renewal_period_end\": \"2014-06-22T06:42:11.785Z\",\n      \"cancel_at_period_end\": true,\n      \"currency\": \"string\",\n      \"license_key\": \"string\",\n      \"manage_url\": \"string\",\n      \"checkout_configuration_id\": \"string\",\n      \"metadata\": {\n        \"key_0\": 8566\n      },\n      \"user\": {\n        \"key_0\": \"string\"\n      },\n      \"member\": {\n        \"key_0\": true,\n        \"key_1\": 4680,\n        \"key_2\": \"string\",\n        \"key_3\": true\n      },\n      \"company\": {\n        \"key_0\": 4263.370668647686\n      },\n      \"product\": {\n        \"key_0\": 3219.146263141253,\n        \"key_1\": false\n      },\n      \"plan\": {\n        \"key_0\": 3992.3314119818397,\n        \"key_1\": true\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"status\": \"string\",\n      \"created_at\": \"1974-01-02T01:39:17.771Z\",\n      \"updated_at\": \"2015-08-21T22:43:29.126Z\",\n      \"joined_at\": \"1969-04-22T12:47:26.649Z\",\n      \"canceled_at\": \"2009-07-11T05:32:37.141Z\",\n      \"renewal_period_start\": \"2000-04-04T20:41:29.921Z\",\n      \"renewal_period_end\": \"2007-02-18T06:09:56.126Z\",\n      \"cancel_at_period_end\": true,\n      \"currency\": \"string\",\n      \"license_key\": \"string\",\n      \"manage_url\": \"string\",\n      \"checkout_configuration_id\": \"string\",\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"user\": {\n        \"key_0\": 6752.913827417787\n      },\n      \"member\": {\n        \"key_0\": 9274.25174324421,\n        \"key_1\": 2449\n      },\n      \"company\": {\n        \"key_0\": 8484,\n        \"key_1\": true,\n        \"key_2\": \"string\"\n      },\n      \"product\": {\n        \"key_0\": false\n      },\n      \"plan\": {\n        \"key_0\": 6688.2458995086445\n      }\n    }\n  ],\n  \"page_info\": {\n    \"has_next_page\": false,\n    \"has_previous_page\": false,\n    \"start_cursor\": \"string\",\n    \"end_cursor\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f12852ff-18b7-429d-b8c2-7095bc8fa8af",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "memberships"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "first",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "last",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "company_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "plan_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "plan_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "statuses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "statuses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cancel_options",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cancel_options",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "promo_code_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "promo_code_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_after",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c13bb993-279c-4981-8b9d-54fc7e30ad4d",
+          "name": "Retrieve a membership",
+          "request": {
+            "name": "Retrieve a membership",
+            "description": {},
+            "url": {
+              "path": [
+                "memberships",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The membership ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6f9a46a8-4570-458c-a583-873036d26632",
+              "name": "A membership.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "memberships",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The membership ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"string\",\n  \"created_at\": \"2018-11-18T12:48:15.655Z\",\n  \"updated_at\": \"1988-07-07T03:01:01.809Z\",\n  \"joined_at\": \"1982-10-28T13:54:18.251Z\",\n  \"canceled_at\": \"2017-10-11T08:45:24.331Z\",\n  \"renewal_period_start\": \"2001-01-25T07:01:08.721Z\",\n  \"renewal_period_end\": \"1958-02-03T10:36:32.596Z\",\n  \"cancel_at_period_end\": false,\n  \"currency\": \"string\",\n  \"license_key\": \"string\",\n  \"manage_url\": \"string\",\n  \"checkout_configuration_id\": \"string\",\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": true,\n    \"key_2\": true\n  },\n  \"user\": {\n    \"key_0\": false,\n    \"key_1\": 8727.559883007378,\n    \"key_2\": 5944\n  },\n  \"member\": {\n    \"key_0\": \"string\"\n  },\n  \"company\": {\n    \"key_0\": 5466.085899950977\n  },\n  \"product\": {\n    \"key_0\": false,\n    \"key_1\": 6459,\n    \"key_2\": 1158.377962631364,\n    \"key_3\": \"string\"\n  },\n  \"plan\": {\n    \"key_0\": 8081.040238308504,\n    \"key_1\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c3d7293a-09ec-4146-9b45-88139ca91e4f",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "memberships",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The membership ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "069e92f8-58e6-45ab-a08b-3fda14470c34",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "memberships",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The membership ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e03967da-dd13-4b85-9374-e382792b08f3",
+          "name": "Update a membership",
+          "request": {
+            "name": "Update a membership",
+            "description": {
+              "content": "Update mutable fields on a membership (for example metadata).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "memberships",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The membership ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": \"string\",\n  \"key_1\": \"string\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "67e31fc4-70fd-4007-83ff-aa475622b27b",
+              "name": "The updated membership.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "memberships",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The membership ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": 4060.9717965579093,\n  \"key_1\": 4944.077204050758,\n  \"key_2\": 1357\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"string\",\n  \"created_at\": \"2018-11-18T12:48:15.655Z\",\n  \"updated_at\": \"1988-07-07T03:01:01.809Z\",\n  \"joined_at\": \"1982-10-28T13:54:18.251Z\",\n  \"canceled_at\": \"2017-10-11T08:45:24.331Z\",\n  \"renewal_period_start\": \"2001-01-25T07:01:08.721Z\",\n  \"renewal_period_end\": \"1958-02-03T10:36:32.596Z\",\n  \"cancel_at_period_end\": false,\n  \"currency\": \"string\",\n  \"license_key\": \"string\",\n  \"manage_url\": \"string\",\n  \"checkout_configuration_id\": \"string\",\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": true,\n    \"key_2\": true\n  },\n  \"user\": {\n    \"key_0\": false,\n    \"key_1\": 8727.559883007378,\n    \"key_2\": 5944\n  },\n  \"member\": {\n    \"key_0\": \"string\"\n  },\n  \"company\": {\n    \"key_0\": 5466.085899950977\n  },\n  \"product\": {\n    \"key_0\": false,\n    \"key_1\": 6459,\n    \"key_2\": 1158.377962631364,\n    \"key_3\": \"string\"\n  },\n  \"plan\": {\n    \"key_0\": 8081.040238308504,\n    \"key_1\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "44acba7e-b079-44be-aaf2-99c829b56ff5",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "memberships",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The membership ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": 4060.9717965579093,\n  \"key_1\": 4944.077204050758,\n  \"key_2\": 1357\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3e87e278-99b6-4a23-bb1e-2c6620149dfc",
+          "name": "Add free days to a membership",
+          "request": {
+            "name": "Add free days to a membership",
+            "description": {
+              "content": "Extends the current renewal period by a number of free days. Path segment modeled from the documented `add-free-days` operation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "memberships",
+                ":id",
+                "add_free_days"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"days\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ec517211-d09c-4c61-b098-0952e35e546a",
+              "name": "The updated membership.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "memberships",
+                    ":id",
+                    "add_free_days"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"days\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"string\",\n  \"created_at\": \"2018-11-18T12:48:15.655Z\",\n  \"updated_at\": \"1988-07-07T03:01:01.809Z\",\n  \"joined_at\": \"1982-10-28T13:54:18.251Z\",\n  \"canceled_at\": \"2017-10-11T08:45:24.331Z\",\n  \"renewal_period_start\": \"2001-01-25T07:01:08.721Z\",\n  \"renewal_period_end\": \"1958-02-03T10:36:32.596Z\",\n  \"cancel_at_period_end\": false,\n  \"currency\": \"string\",\n  \"license_key\": \"string\",\n  \"manage_url\": \"string\",\n  \"checkout_configuration_id\": \"string\",\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": true,\n    \"key_2\": true\n  },\n  \"user\": {\n    \"key_0\": false,\n    \"key_1\": 8727.559883007378,\n    \"key_2\": 5944\n  },\n  \"member\": {\n    \"key_0\": \"string\"\n  },\n  \"company\": {\n    \"key_0\": 5466.085899950977\n  },\n  \"product\": {\n    \"key_0\": false,\n    \"key_1\": 6459,\n    \"key_2\": 1158.377962631364,\n    \"key_3\": \"string\"\n  },\n  \"plan\": {\n    \"key_0\": 8081.040238308504,\n    \"key_1\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "85343158-2d0a-499d-8bf9-232e589d3e16",
+          "name": "Cancel a membership",
+          "request": {
+            "name": "Cancel a membership",
+            "description": {
+              "content": "Cancels a membership immediately or at period end. Path segment modeled from the documented `cancel` operation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "memberships",
+                ":id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e3eb1680-6b2f-4e4d-bb9a-c48f993f248c",
+              "name": "The canceled membership.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "memberships",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"string\",\n  \"created_at\": \"2018-11-18T12:48:15.655Z\",\n  \"updated_at\": \"1988-07-07T03:01:01.809Z\",\n  \"joined_at\": \"1982-10-28T13:54:18.251Z\",\n  \"canceled_at\": \"2017-10-11T08:45:24.331Z\",\n  \"renewal_period_start\": \"2001-01-25T07:01:08.721Z\",\n  \"renewal_period_end\": \"1958-02-03T10:36:32.596Z\",\n  \"cancel_at_period_end\": false,\n  \"currency\": \"string\",\n  \"license_key\": \"string\",\n  \"manage_url\": \"string\",\n  \"checkout_configuration_id\": \"string\",\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": true,\n    \"key_2\": true\n  },\n  \"user\": {\n    \"key_0\": false,\n    \"key_1\": 8727.559883007378,\n    \"key_2\": 5944\n  },\n  \"member\": {\n    \"key_0\": \"string\"\n  },\n  \"company\": {\n    \"key_0\": 5466.085899950977\n  },\n  \"product\": {\n    \"key_0\": false,\n    \"key_1\": 6459,\n    \"key_2\": 1158.377962631364,\n    \"key_3\": \"string\"\n  },\n  \"plan\": {\n    \"key_0\": 8081.040238308504,\n    \"key_1\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "78ec454d-5109-4497-b48f-d02021ebc713",
+          "name": "Uncancel a membership",
+          "request": {
+            "name": "Uncancel a membership",
+            "description": {
+              "content": "Reverses a scheduled cancellation. Path segment modeled from the documented `uncancel` operation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "memberships",
+                ":id",
+                "uncancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c20d867a-04ad-4353-a929-c0d7aebaa9b5",
+              "name": "The membership.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "memberships",
+                    ":id",
+                    "uncancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"string\",\n  \"created_at\": \"2018-11-18T12:48:15.655Z\",\n  \"updated_at\": \"1988-07-07T03:01:01.809Z\",\n  \"joined_at\": \"1982-10-28T13:54:18.251Z\",\n  \"canceled_at\": \"2017-10-11T08:45:24.331Z\",\n  \"renewal_period_start\": \"2001-01-25T07:01:08.721Z\",\n  \"renewal_period_end\": \"1958-02-03T10:36:32.596Z\",\n  \"cancel_at_period_end\": false,\n  \"currency\": \"string\",\n  \"license_key\": \"string\",\n  \"manage_url\": \"string\",\n  \"checkout_configuration_id\": \"string\",\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": true,\n    \"key_2\": true\n  },\n  \"user\": {\n    \"key_0\": false,\n    \"key_1\": 8727.559883007378,\n    \"key_2\": 5944\n  },\n  \"member\": {\n    \"key_0\": \"string\"\n  },\n  \"company\": {\n    \"key_0\": 5466.085899950977\n  },\n  \"product\": {\n    \"key_0\": false,\n    \"key_1\": 6459,\n    \"key_2\": 1158.377962631364,\n    \"key_3\": \"string\"\n  },\n  \"plan\": {\n    \"key_0\": 8081.040238308504,\n    \"key_1\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "34b284bc-5c2e-4edf-923e-ec5051ca67f9",
+          "name": "Pause a membership",
+          "request": {
+            "name": "Pause a membership",
+            "description": {},
+            "url": {
+              "path": [
+                "memberships",
+                ":id",
+                "pause"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ba87d793-c6d7-48b0-ab0f-f86a63d09f54",
+              "name": "The paused membership.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "memberships",
+                    ":id",
+                    "pause"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"string\",\n  \"created_at\": \"2018-11-18T12:48:15.655Z\",\n  \"updated_at\": \"1988-07-07T03:01:01.809Z\",\n  \"joined_at\": \"1982-10-28T13:54:18.251Z\",\n  \"canceled_at\": \"2017-10-11T08:45:24.331Z\",\n  \"renewal_period_start\": \"2001-01-25T07:01:08.721Z\",\n  \"renewal_period_end\": \"1958-02-03T10:36:32.596Z\",\n  \"cancel_at_period_end\": false,\n  \"currency\": \"string\",\n  \"license_key\": \"string\",\n  \"manage_url\": \"string\",\n  \"checkout_configuration_id\": \"string\",\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": true,\n    \"key_2\": true\n  },\n  \"user\": {\n    \"key_0\": false,\n    \"key_1\": 8727.559883007378,\n    \"key_2\": 5944\n  },\n  \"member\": {\n    \"key_0\": \"string\"\n  },\n  \"company\": {\n    \"key_0\": 5466.085899950977\n  },\n  \"product\": {\n    \"key_0\": false,\n    \"key_1\": 6459,\n    \"key_2\": 1158.377962631364,\n    \"key_3\": \"string\"\n  },\n  \"plan\": {\n    \"key_0\": 8081.040238308504,\n    \"key_1\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "174d0869-288d-42b4-86af-88f6f99bc760",
+          "name": "Resume a membership",
+          "request": {
+            "name": "Resume a membership",
+            "description": {},
+            "url": {
+              "path": [
+                "memberships",
+                ":id",
+                "resume"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d9b03ff1-efc2-4088-a41c-ec5248826acc",
+              "name": "The resumed membership.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "memberships",
+                    ":id",
+                    "resume"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"string\",\n  \"created_at\": \"2018-11-18T12:48:15.655Z\",\n  \"updated_at\": \"1988-07-07T03:01:01.809Z\",\n  \"joined_at\": \"1982-10-28T13:54:18.251Z\",\n  \"canceled_at\": \"2017-10-11T08:45:24.331Z\",\n  \"renewal_period_start\": \"2001-01-25T07:01:08.721Z\",\n  \"renewal_period_end\": \"1958-02-03T10:36:32.596Z\",\n  \"cancel_at_period_end\": false,\n  \"currency\": \"string\",\n  \"license_key\": \"string\",\n  \"manage_url\": \"string\",\n  \"checkout_configuration_id\": \"string\",\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": true,\n    \"key_2\": true\n  },\n  \"user\": {\n    \"key_0\": false,\n    \"key_1\": 8727.559883007378,\n    \"key_2\": 5944\n  },\n  \"member\": {\n    \"key_0\": \"string\"\n  },\n  \"company\": {\n    \"key_0\": 5466.085899950977\n  },\n  \"product\": {\n    \"key_0\": false,\n    \"key_1\": 6459,\n    \"key_2\": 1158.377962631364,\n    \"key_3\": \"string\"\n  },\n  \"plan\": {\n    \"key_0\": 8081.040238308504,\n    \"key_1\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.whop.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "88be5566-906d-4c91-9a1a-a528b8ddd834",
+    "name": "Whop REST API (v1) Checkout Configurations Memberships API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Whop REST API (v1) is the current primary REST surface for the Whop digital-products / memberships / creator-commerce platform. It lets applications manage memberships and access, products (access passes) and their pricing plans, take payments and issue refunds, manage users and companies, build checkout flows, pay out users via transfers, and register webhooks. All requests are authenticated with a Bearer token (`Authorization: Bearer <API_KEY>`); a Company/Account API key and an App API key are the two key types, with OAuth tokens used when acting on behalf of a signed-in Whop user.\nGrounding notes: base URLs, the Bearer scheme, the `List memberships` and `List payments` query parameters and response fields, and the resource / operation catalog are taken from Whop's published documentation at docs.whop.com (see the docs `llms.txt` index). Individual action sub-paths (for example the cancel / pause / resume membership actions) are modeled from the documented operation names; verify exact path segments against the live reference on reconciliation.\n\nContact Support:\n Name: API Evangelist\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

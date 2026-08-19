@@ -1,0 +1,804 @@
+{
+  "item": [
+    {
+      "id": "6add28c6-f017-448a-9956-0d6a587d2856",
+      "name": "Payments",
+      "description": {
+        "content": "Charges, refunds, retries, and voids.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "734c2bd3-5096-4d49-b70e-835a74f2f0ca",
+          "name": "List payments",
+          "request": {
+            "name": "List payments",
+            "description": {},
+            "url": {
+              "path": [
+                "payments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "first",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "last",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "company_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_ids",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_ids",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "plan_ids",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "plan_ids",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "statuses",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "statuses",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "substatuses",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "substatuses",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "billing_reasons",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "billing_reasons",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "currencies",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "currencies",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": null,
+                  "value": "<string>",
+                  "description": "Search by user ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_free",
+                  "value": "<boolean>",
+                  "description": "Include zero-amount payments."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d4d0e00d-9940-4875-9b1d-8db06e2d1a1f",
+              "name": "A page of payments.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "first",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "last",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "company_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "plan_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "plan_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "statuses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "statuses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "substatuses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "substatuses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "billing_reasons",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "billing_reasons",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currencies",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currencies",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "null",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_free",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"status\": \"string\",\n      \"substatus\": \"string\",\n      \"created_at\": \"1956-08-30T22:48:07.558Z\",\n      \"updated_at\": \"1958-08-30T07:11:34.832Z\",\n      \"paid_at\": \"1983-11-11T04:02:06.298Z\",\n      \"total\": 6005.365579897867,\n      \"subtotal\": 9683.574471459315,\n      \"currency\": \"string\",\n      \"refunded_amount\": 3863.068211714209,\n      \"card_last4\": \"string\",\n      \"billing_reason\": \"string\",\n      \"failure_message\": \"string\",\n      \"user\": {\n        \"key_0\": 1396,\n        \"key_1\": \"string\"\n      },\n      \"plan\": {\n        \"key_0\": 4430.793085511548,\n        \"key_1\": 5759\n      },\n      \"product\": {\n        \"key_0\": false\n      },\n      \"membership\": {\n        \"key_0\": true,\n        \"key_1\": 5164.092284930075\n      },\n      \"payment_method\": {\n        \"key_0\": \"string\",\n        \"key_1\": false,\n        \"key_2\": 6478\n      },\n      \"company\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"promo_code\": {\n        \"key_0\": \"string\",\n        \"key_1\": 1703,\n        \"key_2\": true,\n        \"key_3\": \"string\"\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"status\": \"string\",\n      \"substatus\": \"string\",\n      \"created_at\": \"2003-06-27T23:51:52.118Z\",\n      \"updated_at\": \"1975-01-23T08:02:08.940Z\",\n      \"paid_at\": \"2025-02-10T02:29:45.886Z\",\n      \"total\": 4334.01213421303,\n      \"subtotal\": 1076.287077424908,\n      \"currency\": \"string\",\n      \"refunded_amount\": 4905.657724758053,\n      \"card_last4\": \"string\",\n      \"billing_reason\": \"string\",\n      \"failure_message\": \"string\",\n      \"user\": {\n        \"key_0\": true\n      },\n      \"plan\": {\n        \"key_0\": 1139,\n        \"key_1\": 7563\n      },\n      \"product\": {\n        \"key_0\": true\n      },\n      \"membership\": {\n        \"key_0\": \"string\",\n        \"key_1\": true\n      },\n      \"payment_method\": {\n        \"key_0\": 7816,\n        \"key_1\": true,\n        \"key_2\": 6929.705579918102,\n        \"key_3\": 4899.862400737006\n      },\n      \"company\": {\n        \"key_0\": 3403,\n        \"key_1\": 830\n      },\n      \"promo_code\": {\n        \"key_0\": 950.322884408521,\n        \"key_1\": 4610.34507848294\n      }\n    }\n  ],\n  \"page_info\": {\n    \"has_next_page\": true,\n    \"has_previous_page\": true,\n    \"start_cursor\": \"string\",\n    \"end_cursor\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "50af3c34-29e6-4ac7-812e-32bd3282f107",
+          "name": "Create a payment",
+          "request": {
+            "name": "Create a payment",
+            "description": {
+              "content": "Charge a saved payment method off-session for a member.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": \"string\",\n  \"key_1\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d168cab3-01ba-4178-8007-43c7edd1cb7c",
+              "name": "The created payment.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": \"string\",\n  \"key_1\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"string\",\n  \"substatus\": \"string\",\n  \"created_at\": \"2024-07-08T06:59:49.561Z\",\n  \"updated_at\": \"1956-12-09T14:53:03.621Z\",\n  \"paid_at\": \"1949-05-16T00:48:13.770Z\",\n  \"total\": 2744.198188715721,\n  \"subtotal\": 3240.240032076157,\n  \"currency\": \"string\",\n  \"refunded_amount\": 4026.3554648263244,\n  \"card_last4\": \"string\",\n  \"billing_reason\": \"string\",\n  \"failure_message\": \"string\",\n  \"user\": {\n    \"key_0\": true\n  },\n  \"plan\": {\n    \"key_0\": 2311.5574169466245,\n    \"key_1\": \"string\"\n  },\n  \"product\": {\n    \"key_0\": 8389,\n    \"key_1\": true,\n    \"key_2\": \"string\",\n    \"key_3\": false\n  },\n  \"membership\": {\n    \"key_0\": 7023.345305834964\n  },\n  \"payment_method\": {\n    \"key_0\": 7656.376827206902,\n    \"key_1\": 8048.774643820347\n  },\n  \"company\": {\n    \"key_0\": 5411.039564191741\n  },\n  \"promo_code\": {\n    \"key_0\": 6031.855450434132\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c9483866-5d03-4e59-9929-c25c3d9208dc",
+          "name": "Retrieve a payment",
+          "request": {
+            "name": "Retrieve a payment",
+            "description": {},
+            "url": {
+              "path": [
+                "payments",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ecf4bed1-7f9b-42be-8c18-135462d1d364",
+              "name": "A payment.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"string\",\n  \"substatus\": \"string\",\n  \"created_at\": \"2024-07-08T06:59:49.561Z\",\n  \"updated_at\": \"1956-12-09T14:53:03.621Z\",\n  \"paid_at\": \"1949-05-16T00:48:13.770Z\",\n  \"total\": 2744.198188715721,\n  \"subtotal\": 3240.240032076157,\n  \"currency\": \"string\",\n  \"refunded_amount\": 4026.3554648263244,\n  \"card_last4\": \"string\",\n  \"billing_reason\": \"string\",\n  \"failure_message\": \"string\",\n  \"user\": {\n    \"key_0\": true\n  },\n  \"plan\": {\n    \"key_0\": 2311.5574169466245,\n    \"key_1\": \"string\"\n  },\n  \"product\": {\n    \"key_0\": 8389,\n    \"key_1\": true,\n    \"key_2\": \"string\",\n    \"key_3\": false\n  },\n  \"membership\": {\n    \"key_0\": 7023.345305834964\n  },\n  \"payment_method\": {\n    \"key_0\": 7656.376827206902,\n    \"key_1\": 8048.774643820347\n  },\n  \"company\": {\n    \"key_0\": 5411.039564191741\n  },\n  \"promo_code\": {\n    \"key_0\": 6031.855450434132\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "02f78017-4737-45be-87f0-427e30d850c5",
+          "name": "Refund a payment",
+          "request": {
+            "name": "Refund a payment",
+            "description": {},
+            "url": {
+              "path": [
+                "payments",
+                ":id",
+                "refund"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4f7eb79d-8c5e-4a80-8d9c-e760d9dfe73b",
+              "name": "The refunded payment.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id",
+                    "refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"string\",\n  \"substatus\": \"string\",\n  \"created_at\": \"2024-07-08T06:59:49.561Z\",\n  \"updated_at\": \"1956-12-09T14:53:03.621Z\",\n  \"paid_at\": \"1949-05-16T00:48:13.770Z\",\n  \"total\": 2744.198188715721,\n  \"subtotal\": 3240.240032076157,\n  \"currency\": \"string\",\n  \"refunded_amount\": 4026.3554648263244,\n  \"card_last4\": \"string\",\n  \"billing_reason\": \"string\",\n  \"failure_message\": \"string\",\n  \"user\": {\n    \"key_0\": true\n  },\n  \"plan\": {\n    \"key_0\": 2311.5574169466245,\n    \"key_1\": \"string\"\n  },\n  \"product\": {\n    \"key_0\": 8389,\n    \"key_1\": true,\n    \"key_2\": \"string\",\n    \"key_3\": false\n  },\n  \"membership\": {\n    \"key_0\": 7023.345305834964\n  },\n  \"payment_method\": {\n    \"key_0\": 7656.376827206902,\n    \"key_1\": 8048.774643820347\n  },\n  \"company\": {\n    \"key_0\": 5411.039564191741\n  },\n  \"promo_code\": {\n    \"key_0\": 6031.855450434132\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9ce25d01-b4aa-4afa-a791-097b6d3e2b32",
+          "name": "Retry a failed payment",
+          "request": {
+            "name": "Retry a failed payment",
+            "description": {},
+            "url": {
+              "path": [
+                "payments",
+                ":id",
+                "retry"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2a902d49-d6a8-45ee-85d6-0b707e37810c",
+              "name": "The payment.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id",
+                    "retry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"string\",\n  \"substatus\": \"string\",\n  \"created_at\": \"2024-07-08T06:59:49.561Z\",\n  \"updated_at\": \"1956-12-09T14:53:03.621Z\",\n  \"paid_at\": \"1949-05-16T00:48:13.770Z\",\n  \"total\": 2744.198188715721,\n  \"subtotal\": 3240.240032076157,\n  \"currency\": \"string\",\n  \"refunded_amount\": 4026.3554648263244,\n  \"card_last4\": \"string\",\n  \"billing_reason\": \"string\",\n  \"failure_message\": \"string\",\n  \"user\": {\n    \"key_0\": true\n  },\n  \"plan\": {\n    \"key_0\": 2311.5574169466245,\n    \"key_1\": \"string\"\n  },\n  \"product\": {\n    \"key_0\": 8389,\n    \"key_1\": true,\n    \"key_2\": \"string\",\n    \"key_3\": false\n  },\n  \"membership\": {\n    \"key_0\": 7023.345305834964\n  },\n  \"payment_method\": {\n    \"key_0\": 7656.376827206902,\n    \"key_1\": 8048.774643820347\n  },\n  \"company\": {\n    \"key_0\": 5411.039564191741\n  },\n  \"promo_code\": {\n    \"key_0\": 6031.855450434132\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6308000e-5911-4cab-9f17-f723a610183f",
+          "name": "Void a payment",
+          "request": {
+            "name": "Void a payment",
+            "description": {},
+            "url": {
+              "path": [
+                "payments",
+                ":id",
+                "void"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fe0bd2c2-c316-45aa-a2d0-2fe7393e3307",
+              "name": "The voided payment.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id",
+                    "void"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"string\",\n  \"substatus\": \"string\",\n  \"created_at\": \"2024-07-08T06:59:49.561Z\",\n  \"updated_at\": \"1956-12-09T14:53:03.621Z\",\n  \"paid_at\": \"1949-05-16T00:48:13.770Z\",\n  \"total\": 2744.198188715721,\n  \"subtotal\": 3240.240032076157,\n  \"currency\": \"string\",\n  \"refunded_amount\": 4026.3554648263244,\n  \"card_last4\": \"string\",\n  \"billing_reason\": \"string\",\n  \"failure_message\": \"string\",\n  \"user\": {\n    \"key_0\": true\n  },\n  \"plan\": {\n    \"key_0\": 2311.5574169466245,\n    \"key_1\": \"string\"\n  },\n  \"product\": {\n    \"key_0\": 8389,\n    \"key_1\": true,\n    \"key_2\": \"string\",\n    \"key_3\": false\n  },\n  \"membership\": {\n    \"key_0\": 7023.345305834964\n  },\n  \"payment_method\": {\n    \"key_0\": 7656.376827206902,\n    \"key_1\": 8048.774643820347\n  },\n  \"company\": {\n    \"key_0\": 5411.039564191741\n  },\n  \"promo_code\": {\n    \"key_0\": 6031.855450434132\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.whop.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "415d0c56-c31b-4744-bdbc-10c9f14fc5fd",
+    "name": "Whop REST API (v1) Checkout Configurations Payments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Whop REST API (v1) is the current primary REST surface for the Whop digital-products / memberships / creator-commerce platform. It lets applications manage memberships and access, products (access passes) and their pricing plans, take payments and issue refunds, manage users and companies, build checkout flows, pay out users via transfers, and register webhooks. All requests are authenticated with a Bearer token (`Authorization: Bearer <API_KEY>`); a Company/Account API key and an App API key are the two key types, with OAuth tokens used when acting on behalf of a signed-in Whop user.\nGrounding notes: base URLs, the Bearer scheme, the `List memberships` and `List payments` query parameters and response fields, and the resource / operation catalog are taken from Whop's published documentation at docs.whop.com (see the docs `llms.txt` index). Individual action sub-paths (for example the cancel / pause / resume membership actions) are modeled from the documented operation names; verify exact path segments against the live reference on reconciliation.\n\nContact Support:\n Name: API Evangelist\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

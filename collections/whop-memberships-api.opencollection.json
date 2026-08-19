@@ -1,0 +1,261 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Whop REST API (v1) Checkout Configurations Memberships API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Memberships",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List memberships",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.whop.com/api/v1/memberships",
+            "params": [
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for forward pagination."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for backward pagination."
+              },
+              {
+                "name": "first",
+                "value": "",
+                "type": "query",
+                "description": "Return the first n elements."
+              },
+              {
+                "name": "last",
+                "value": "",
+                "type": "query",
+                "description": "Return the last n elements."
+              },
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by company; required for API keys."
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Sort field."
+              },
+              {
+                "name": "product_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter by product identifiers."
+              },
+              {
+                "name": "plan_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter by plan identifiers."
+              },
+              {
+                "name": "user_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter by user identifiers."
+              },
+              {
+                "name": "statuses",
+                "value": "",
+                "type": "query",
+                "description": "Filter by membership status."
+              },
+              {
+                "name": "cancel_options",
+                "value": "",
+                "type": "query",
+                "description": "Filter by cancellation reason."
+              },
+              {
+                "name": "promo_code_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter by applied promo codes."
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a cursor-paginated list of memberships. `company_id` is required when authenticating with an API key."
+        },
+        {
+          "info": {
+            "name": "Retrieve a membership",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.whop.com/api/v1/memberships/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The membership ID."
+              }
+            ]
+          },
+          "docs": "Retrieve a membership"
+        },
+        {
+          "info": {
+            "name": "Update a membership",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.whop.com/api/v1/memberships/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The membership ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update mutable fields on a membership (for example metadata)."
+        },
+        {
+          "info": {
+            "name": "Add free days to a membership",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.whop.com/api/v1/memberships/:id/add_free_days",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Extends the current renewal period by a number of free days. Path segment modeled from the documented `add-free-days` operation."
+        },
+        {
+          "info": {
+            "name": "Cancel a membership",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.whop.com/api/v1/memberships/:id/cancel",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancels a membership immediately or at period end. Path segment modeled from the documented `cancel` operation."
+        },
+        {
+          "info": {
+            "name": "Uncancel a membership",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.whop.com/api/v1/memberships/:id/uncancel",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Reverses a scheduled cancellation. Path segment modeled from the documented `uncancel` operation."
+        },
+        {
+          "info": {
+            "name": "Pause a membership",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.whop.com/api/v1/memberships/:id/pause",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Pause a membership"
+        },
+        {
+          "info": {
+            "name": "Resume a membership",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.whop.com/api/v1/memberships/:id/resume",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Resume a membership"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
