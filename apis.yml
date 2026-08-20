@@ -44,6 +44,9 @@ apis:
   name: Whop GraphQL API
   tags:
   - GraphQL
+  - Application
+  tags_raw:
+  - GraphQL
   - Apps
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://docs.whop.com/developer/api/getting-started
@@ -62,6 +65,10 @@ apis:
 - aid: whop:whop-realtime-websocket-api
   name: Whop Realtime WebSocket API
   tags:
+  - WebSocket
+  - Real-Time
+  - Application
+  tags_raw:
   - WebSocket
   - Realtime
   - Apps
@@ -268,6 +275,8 @@ apis:
   humanURL: https://docs.whop.com/api-reference/memberships/list-memberships
   baseURL: https://api.whop.com/api/v1
   tags:
+  - Product
+  tags_raw:
   - Products
   properties:
   - type: OpenAPI
@@ -379,6 +388,8 @@ apis:
   humanURL: https://docs.whop.com/api-reference/memberships/list-memberships
   baseURL: https://api.whop.com/api/v1
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
@@ -416,6 +427,8 @@ apis:
   humanURL: https://docs.whop.com/api-reference/memberships/list-memberships
   baseURL: https://api.whop.com/api/v1
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
