@@ -42,6 +42,14 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/whop.png
 tags:
+- Membership
+- Payments
+- Creator Economy
+- Marketplace
+- Digital Products
+- Access Control
+- Commerce
+tags_raw:
 - Memberships
 - Payments
 - Creator Economy
@@ -177,6 +185,8 @@ apis:
   humanURL: https://docs.whop.com/api-reference/memberships/list-memberships
   baseURL: https://api.whop.com/api/v1
   tags:
+  - Membership
+  tags_raw:
   - Memberships
   properties:
   - type: OpenAPI
