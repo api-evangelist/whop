@@ -1,16 +1,7 @@
 {
   "provider": "whop",
   "sources": [
-    "whop-checkout-configurations-api-openapi.yml",
-    "whop-companies-api-openapi.yml",
-    "whop-memberships-api-openapi.yml",
-    "whop-payments-api-openapi.yml",
-    "whop-plans-api-openapi.yml",
-    "whop-products-api-openapi.yml",
-    "whop-promo-codes-api-openapi.yml",
-    "whop-transfers-api-openapi.yml",
-    "whop-users-api-openapi.yml",
-    "whop-webhooks-api-openapi.yml"
+    "_original/whop-openapi.yml"
   ],
   "outputs": [
     "whop-checkout-configurations-api-openapi.yml",
@@ -27,6 +18,21 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "whop-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "whop-checkout-configurations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "whop-companies-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "whop-memberships-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "whop-payments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "whop-plans-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "whop-products-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "whop-promo-codes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "whop-transfers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "whop-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "whop-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

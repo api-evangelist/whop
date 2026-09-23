@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Whop REST API (v1) Checkout Configurations Products API
-  description: 'The Whop REST API (v1) is the current primary REST surface for the Whop digital-products / memberships / creator-commerce platform. It lets applications manage memberships and access, products (access passes) and their pricing plans, take payments and issue refunds, manage users and companies, build checkout flows, pay out users via transfers, and register webhooks. All requests are authenticated with a Bearer token (`Authorization: Bearer <API_KEY>`); a Company/Account API key and an App API key are the two key types, with OAuth tokens used when acting on behalf of a signed-in Whop user.
-
-    Grounding notes: base URLs, the Bearer scheme, the `List memberships` and `List payments` query parameters and response fields, and the resource / operation catalog are taken from Whop''s published documentation at docs.whop.com (see the docs `llms.txt` index). Individual action sub-paths (for example the cancel / pause / resume membership actions) are modeled from the documented operation names; verify exact path segments against the live reference on reconciliation.'
+  title: Whop REST API (v1) Products API
+  description: The Whop REST API (v1) is the current primary REST surface for the Whop digital-products / memberships / creator-commerce platform.
   version: '1.0'
   contact:
     name: API Evangelist
@@ -126,14 +124,30 @@ paths:
         '204':
           description: The product was deleted.
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    PageInfo:
+      type: object
+      description: Cursor pagination metadata.
+      properties:
+        has_next_page:
+          type: boolean
+        has_previous_page:
+          type: boolean
+        start_cursor:
+          type:
+          - string
+          - 'null'
+        end_cursor:
+          type:
+          - string
+          - 'null'
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
     Product:
       type: object
       description: A product (access pass) sold by a company. Fields modeled from the documented Product object.
@@ -143,11 +157,13 @@ components:
         title:
           type: string
         description:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         route:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         visibility:
           type: string
         member_count:
@@ -164,27 +180,13 @@ components:
         metadata:
           type: object
           additionalProperties: true
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
-    PageInfo:
-      type: object
-      description: Cursor pagination metadata.
-      properties:
-        has_next_page:
-          type: boolean
-        has_previous_page:
-          type: boolean
-        start_cursor:
-          type: string
-          nullable: true
-        end_cursor:
-          type: string
-          nullable: true
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
