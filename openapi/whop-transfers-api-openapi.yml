@@ -80,22 +80,6 @@ paths:
                 $ref: '#/components/schemas/Transfer'
 components:
   schemas:
-    PageInfo:
-      type: object
-      description: Cursor pagination metadata.
-      properties:
-        has_next_page:
-          type: boolean
-        has_previous_page:
-          type: boolean
-        start_cursor:
-          type:
-          - string
-          - 'null'
-        end_cursor:
-          type:
-          - string
-          - 'null'
     Transfer:
       type: object
       description: A programmatic payout to a user or ledger account.
@@ -115,6 +99,22 @@ components:
         created_at:
           type: string
           format: date-time
+    PageInfo:
+      type: object
+      description: Cursor pagination metadata.
+      properties:
+        has_next_page:
+          type: boolean
+        has_previous_page:
+          type: boolean
+        start_cursor:
+          type:
+          - string
+          - 'null'
+        end_cursor:
+          type:
+          - string
+          - 'null'
   securitySchemes:
     bearerAuth:
       type: http

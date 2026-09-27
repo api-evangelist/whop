@@ -124,7 +124,21 @@ paths:
         '204':
           description: The product was deleted.
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
     PageInfo:
       type: object
       description: Cursor pagination metadata.
@@ -141,13 +155,6 @@ components:
           type:
           - string
           - 'null'
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
     Product:
       type: object
       description: A product (access pass) sold by a company. Fields modeled from the documented Product object.
@@ -180,13 +187,6 @@ components:
         metadata:
           type: object
           additionalProperties: true
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

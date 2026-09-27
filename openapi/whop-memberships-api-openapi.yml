@@ -296,36 +296,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Membership'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    PageInfo:
-      type: object
-      description: Cursor pagination metadata.
-      properties:
-        has_next_page:
-          type: boolean
-        has_previous_page:
-          type: boolean
-        start_cursor:
-          type:
-          - string
-          - 'null'
-        end_cursor:
-          type:
-          - string
-          - 'null'
     Membership:
       type: object
       description: A user's access to a product. Fields taken from the documented List memberships response.
@@ -395,6 +366,22 @@ components:
         plan:
           type: object
           additionalProperties: true
+    PageInfo:
+      type: object
+      description: Cursor pagination metadata.
+      properties:
+        has_next_page:
+          type: boolean
+        has_previous_page:
+          type: boolean
+        start_cursor:
+          type:
+          - string
+          - 'null'
+        end_cursor:
+          type:
+          - string
+          - 'null'
     Error:
       type: object
       properties:
@@ -402,6 +389,19 @@ components:
           type: string
         message:
           type: string
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
