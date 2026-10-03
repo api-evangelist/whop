@@ -232,22 +232,6 @@ paths:
                 $ref: '#/components/schemas/Payment'
 components:
   schemas:
-    PageInfo:
-      type: object
-      description: Cursor pagination metadata.
-      properties:
-        has_next_page:
-          type: boolean
-        has_previous_page:
-          type: boolean
-        start_cursor:
-          type:
-          - string
-          - 'null'
-        end_cursor:
-          type:
-          - string
-          - 'null'
     Payment:
       type: object
       description: A payment. Fields taken from the documented List payments (PaymentListItem) response.
@@ -316,6 +300,22 @@ components:
           - object
           - 'null'
           additionalProperties: true
+    PageInfo:
+      type: object
+      description: Cursor pagination metadata.
+      properties:
+        has_next_page:
+          type: boolean
+        has_previous_page:
+          type: boolean
+        start_cursor:
+          type:
+          - string
+          - 'null'
+        end_cursor:
+          type:
+          - string
+          - 'null'
   securitySchemes:
     bearerAuth:
       type: http

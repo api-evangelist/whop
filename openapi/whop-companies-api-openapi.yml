@@ -122,6 +122,22 @@ paths:
                     type: string
 components:
   schemas:
+    PageInfo:
+      type: object
+      description: Cursor pagination metadata.
+      properties:
+        has_next_page:
+          type: boolean
+        has_previous_page:
+          type: boolean
+        start_cursor:
+          type:
+          - string
+          - 'null'
+        end_cursor:
+          type:
+          - string
+          - 'null'
     Company:
       type: object
       description: A seller company (whop) or sub-merchant.
@@ -141,22 +157,6 @@ components:
         created_at:
           type: string
           format: date-time
-    PageInfo:
-      type: object
-      description: Cursor pagination metadata.
-      properties:
-        has_next_page:
-          type: boolean
-        has_previous_page:
-          type: boolean
-        start_cursor:
-          type:
-          - string
-          - 'null'
-        end_cursor:
-          type:
-          - string
-          - 'null'
   securitySchemes:
     bearerAuth:
       type: http

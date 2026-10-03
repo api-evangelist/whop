@@ -104,6 +104,22 @@ paths:
           description: The webhook was deleted.
 components:
   schemas:
+    PageInfo:
+      type: object
+      description: Cursor pagination metadata.
+      properties:
+        has_next_page:
+          type: boolean
+        has_previous_page:
+          type: boolean
+        start_cursor:
+          type:
+          - string
+          - 'null'
+        end_cursor:
+          type:
+          - string
+          - 'null'
     Webhook:
       type: object
       description: A registered webhook endpoint.
@@ -121,22 +137,6 @@ components:
         created_at:
           type: string
           format: date-time
-    PageInfo:
-      type: object
-      description: Cursor pagination metadata.
-      properties:
-        has_next_page:
-          type: boolean
-        has_previous_page:
-          type: boolean
-        start_cursor:
-          type:
-          - string
-          - 'null'
-        end_cursor:
-          type:
-          - string
-          - 'null'
   securitySchemes:
     bearerAuth:
       type: http
