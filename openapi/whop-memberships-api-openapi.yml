@@ -297,6 +297,29 @@ paths:
                 $ref: '#/components/schemas/Membership'
 components:
   schemas:
+    PageInfo:
+      type: object
+      description: Cursor pagination metadata.
+      properties:
+        has_next_page:
+          type: boolean
+        has_previous_page:
+          type: boolean
+        start_cursor:
+          type:
+          - string
+          - 'null'
+        end_cursor:
+          type:
+          - string
+          - 'null'
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
     Membership:
       type: object
       description: A user's access to a product. Fields taken from the documented List memberships response.
@@ -366,29 +389,6 @@ components:
         plan:
           type: object
           additionalProperties: true
-    PageInfo:
-      type: object
-      description: Cursor pagination metadata.
-      properties:
-        has_next_page:
-          type: boolean
-        has_previous_page:
-          type: boolean
-        start_cursor:
-          type:
-          - string
-          - 'null'
-        end_cursor:
-          type:
-          - string
-          - 'null'
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
   responses:
     NotFound:
       description: The requested resource was not found.
