@@ -1,0 +1,56 @@
+slug: whop
+provider: Whop
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: Memberships
+  spec_file: whop-memberships-api-openapi.yml
+  capability_id: BC-4240
+  capability_id_l1: BC-4240
+  capability_name: Subscription Lifecycle Management
+  confidence: 0.85
+  evidence: cancelMembership Cancel a membership; uncancelMembership Uncancel a membership; pauseMembership
+    Pause a membership; addFreeDaysMembership Add free days to a membership
+  reason: Operations manage the in-life state of recurring paid memberships — pause, resume, cancel, extend
+    — which is squarely subscription lifecycle management. Spans modification and cancellation sub-capabilities,
+    so L1 only.
+- tag: Promo Codes
+  spec_file: whop-promo-codes-api-openapi.yml
+  capability_id: BC-440.30
+  capability_id_l1: BC-440
+  capability_name: Discount & Promotion Management
+  confidence: 0.84
+  evidence: POST /promo_codes createPromoCode Create a promo code
+  reason: Creation and maintenance of promotional discount codes applied to purchases is plainly discount
+    and promotion management.
+- tag: Webhooks
+  spec_file: whop-webhooks-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.8
+  evidence: POST /webhooks createWebhook Create a webhook; DELETE /webhooks/{id} deleteWebhook
+  reason: Lifecycle CRUD of outbound webhook subscriptions on Whop's 'public developer platform' — this
+    is exactly webhook/event subscription management in the developer platform capability rather than
+    a business process.
+- tag: Payments
+  spec_file: whop-payments-api-openapi.yml
+  capability_id: BC-4250.40
+  capability_id_l1: BC-4250
+  capability_name: Payment Collection & Dunning
+  confidence: 0.78
+  evidence: POST /payments/{id}/refund refundPayment Refund a payment; POST /payments/{id}/retry retryPayment
+    Retry a failed payment
+  reason: Operations create, refund, retry and void payments for a commerce/memberships platform — payment
+    authorisation and collection mechanics, i.e. payment collection and recovery of failed payments, not
+    accounting ledgers.

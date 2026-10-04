@@ -486,6 +486,9 @@ apis:
   - type: APIReference
     url: https://docs.whop.com/api-reference/promo-codes/promo-code
 common:
+- type: CapabilityMap
+  url: capabilities/whop-capability-edges.yml
+  name: Whop Business Capability Map
 - type: AgenticAccess
   url: agentic-access/whop-agentic-access.yml
 - type: DomainSecurity
