@@ -1,31 +1,30 @@
-# Kin Score artifact — whop — 2026-09-01T210448
+# Kin Score artifact — whop — 2026-09-23T000603
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: whop
-  schema_version: 0.18.0
-  scored_at: '2026-09-01'
-  run_ts: 2026-09-01T210448
-  composite: 33.1
+  schema_version: 0.22.0
+  scored_at: '2026-09-23'
+  run_ts: 2026-09-23T000603
+  composite: 30.0
   band: thin
   facets:
     discoverability: 68.5
-    contract_quality: 30.5
-    governance: 13.6
+    contract_quality: 20.9
+    contract_governance: 13.6
     operational_transparency: 34.2
     developer_ergonomics: 33.3
-    commercial_clarity: 39.5
-    contract_governance: 13.6
     access_clarity: 39.5
   agent_readiness:
-    score: 22.6
-    band: agent-aware
+    score: 47.4
+    band: agent-ready
+    band_gated_from: agent-native
     dimensions:
       spec_presence: true
       agentic_access: derived
       reversibility_documented: documented
-      mcp_server: false
-      auth_clarity: bearer
+      mcp_server: verified
+      auth_clarity: served
       idempotency: false
       error_semantics: false
       openapi_examples: false
@@ -36,9 +35,9 @@ kin_score:
       consent_identity: false
       agent_card: false
       dry_run_mode: false
-      delegated_identity: false
-      protected_resource_metadata: false
-      dynamic_client_registration: false
+      delegated_identity: served
+      protected_resource_metadata: verified
+      dynamic_client_registration: true
       agentic_commerce: false
   regulatory:
     applies: true
@@ -47,9 +46,10 @@ kin_score:
     score: 18.8
     matched_via: tags
   provenance:
+    mcp: first-party
     agentic_access: derived
     contracts:
       total: 10
-      derived: 10
-      coverage: 100.0
+      derived: 0
+      coverage: 0.0
       callable: 100.0
