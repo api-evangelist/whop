@@ -44,6 +44,7 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/whop.png
 tags:
 - Membership
 - Payments
+- Checkout
 - Creator Economy
 - Marketplace
 - Digital Products
@@ -53,6 +54,7 @@ tags:
 tags_raw:
 - Memberships
 - Payments
+- Checkout
 - Creator Economy
 - Marketplace
 - Digital Products
@@ -60,7 +62,7 @@ tags_raw:
 - Commerce
 - Real-Time
 created: '2026-07-05'
-modified: '2026-07-05'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: whop:whop-graphql-api
@@ -514,3 +516,13 @@ common:
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
+x-correction-request:
+  requested: '2026-10-06'
+  source:
+  - _messages/2026-09/2026-09-15-apisio-2105-whop-on-the-checkout-apis-directory.md
+  request: 'Karina Egle (karina@whop.com), 2026-09-15: add Whop to the Checkout tag (https://apis.io/tags/checkout/).'
+  applied: '2026-10-06'
+  applied_note: 'Verified 2026-10-06: Whop''s REST API carries a Checkout Configurations resource (/checkout_configurations in the provider''s
+    OpenAPI, openapi/_original/whop-openapi.yml); GET https://api.whop.com/api/v1/checkout_configurations answers 400 parameter_missing
+    company_id (an invented resource 404s), and docs.whop.com/llms.txt lists checkout-link and payments guides (create-checkout-link.md 200).
+    Added Checkout to tags and tags_raw, the same way Mollie, Klarna, ThriveCart and Square carry it. Tag only - no other change.'
