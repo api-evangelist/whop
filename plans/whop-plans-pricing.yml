@@ -213,3 +213,36 @@ plans:
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - metered
+  units:
+  - transaction
+  plans:
+  - name: Transaction Fees (Payment Processing)
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - transaction
+    periods:
+    - month
+  - name: Payout Fees
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - other
+    periods:
+    - month
+  - name: Fraud, Disputes, and Revenue Optimization
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - other
+    - transaction
+    periods:
+    - month
