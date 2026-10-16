@@ -1,0 +1,21 @@
+{
+  "repo": "whop",
+  "feeds": [
+    {
+      "source": "https://whop.com/blog/rss/",
+      "feed_url": "https://whop.com/blog/rss/",
+      "title": "",
+      "saved": 15,
+      "method": "feed"
+    },
+    {
+      "source": "https://whop.com/blog/",
+      "feed_url": "https://whop.com/blog/rss/",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
+    }
+  ],
+  "post_count": 15,
+  "fetched": "2026-10-10T13:15:00Z"
+}
